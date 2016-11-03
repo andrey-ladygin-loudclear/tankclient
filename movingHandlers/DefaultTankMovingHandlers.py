@@ -30,7 +30,6 @@ class DefaultTankMovingHandlers(actions.Move):
         gun_turns_direction = Global.keyboard[self.GUN_RIGHT] - Global.keyboard[self.GUN_LEFT]
 
         if turns_direction or moving_directions or gun_turns_direction:
-            print('Send')
             Global.TankNetworkListenerConnection.Send({
                 'action': Global.Actions.TANK_MOVE,
                 'pos': self.target.position,
@@ -39,6 +38,12 @@ class DefaultTankMovingHandlers(actions.Move):
                 'gun_turn': gun_turns_direction,
                 'id': self.target.id
             })
+
+        if Global.keyboard[self.FIRE_LIGHT_GUN]:
+            self.target.fire()
+
+        if Global.keyboard[self.FIRE_HEAVY_GUN]:
+            self.target.heavy_fire()
 
         return
 
@@ -73,12 +78,6 @@ class DefaultTankMovingHandlers(actions.Move):
 
         # Set the object's rotation
         self.setGunRotation(gun_turns_direction)
-
-        if Global.keyboard[self.FIRE_LIGHT_GUN]:
-            self.target.fire()
-
-        if Global.keyboard[self.FIRE_HEAVY_GUN]:
-            self.target.heavy_fire()
 
     def checkCollisionsWithObjects(self):
         self.target.cshape = cm.AARectShape(

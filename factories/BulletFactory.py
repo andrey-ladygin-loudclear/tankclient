@@ -11,8 +11,9 @@ class BulletFactory:
 
         if bullet: return bullet
 
-        bullet = BulletFactory.createBulletByClass(object.get('bulletClass'))
+        bullet = BulletFactory.createBulletByClass(object.get('typeClass'))
         bullet.id = object.get('id')
+        bullet.position = object.get('position')
 
         Global.objects['bullets'].append(bullet)
         Global.layers['bullets'].add(bullet)
@@ -29,8 +30,8 @@ class BulletFactory:
 
     @staticmethod
     def createBulletByClass(bullet_class):
-        if bullet_class == 'heavyBullet':
+        if bullet_class == 'HeavyBullet':
             return HeavyBullet()
 
-        if bullet_class == 'standartBullet':
+        if bullet_class == 'StandartBullet':
             return StandartBullet()

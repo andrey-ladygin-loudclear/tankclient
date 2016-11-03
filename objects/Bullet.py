@@ -8,7 +8,7 @@ import cocos.collision_model as cm
 
 from cocos import actions
 from cocos import sprite
-from cocos.actions import Action
+from cocos.actions import Action, MoveBy
 
 import Global
 from events.Explosion import Explosion
@@ -100,6 +100,17 @@ class Bullet(sprite.Sprite):
         anim.image_anchor = (animation.get_max_width() / 2, animation.get_max_height() / 4)
         anim.scale = 0.5
         return anim
+
+    def update(self, object):
+        self.rotation = object.get('rotation')
+        move_by = self.getMoveBy(object.get('position'))
+        self.do(MoveBy(move_by, .15))
+
+    def getMoveBy(self, new_position):
+        curr_x, curr_y = self.position
+        new_x, new_y = new_position
+        return (new_x - curr_x, new_y - curr_y)
+
 
 class removeAfterComplete(Action):
     def step(self, dt):

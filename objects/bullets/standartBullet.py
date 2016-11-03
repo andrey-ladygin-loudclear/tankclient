@@ -10,6 +10,7 @@ from objects.Bullet import Bullet
 
 
 class StandartBullet(Bullet):
+    type = 'StandartBullet'
     spriteName = 'assets/bullets/bullet.png'
 
     scale = 0.8
@@ -33,7 +34,7 @@ class StandartBullet(Bullet):
         return random.randrange(-100, 100) / 10
 
     def getFireAnimation(self):
-        explosion = pyglet.image.load('sprites/weapons/fire-small-gun.png')
+        explosion = pyglet.image.load('assets/weapons/fire-small-gun.png')
         explosion_seq = pyglet.image.ImageGrid(explosion, 1, 3)
         explosion_tex_seq = pyglet.image.TextureGrid(explosion_seq)
         return pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .02, loop=False)
@@ -46,7 +47,7 @@ class StandartBullet(Bullet):
         return anim
 
     def getExplosionAnimation(self):
-        explosion = pyglet.image.load('sprites/weapons/standart-bullet-explode.png')
+        explosion = pyglet.image.load('assets/weapons/standart-bullet-explode.png')
         explosion_seq = pyglet.image.ImageGrid(explosion, 1, 12)
         explosion_tex_seq = pyglet.image.TextureGrid(explosion_seq)
         return pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .05, loop=False)

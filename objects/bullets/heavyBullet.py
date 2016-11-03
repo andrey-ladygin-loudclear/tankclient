@@ -11,6 +11,7 @@ from objects.Bullet import Bullet
 
 
 class HeavyBullet(Bullet):
+    type = 'HeavyBullet'
     spriteName = 'assets/bullets/bullet-origin.png'
     startPosition = (0, 0)
     scale = 1
@@ -35,7 +36,7 @@ class HeavyBullet(Bullet):
         return random.randrange(-50, 50) / 10
 
     def getFireAnimation(self):
-        explosion = pyglet.image.load('sprites/weapons/fire-heavy-gun.png')
+        explosion = pyglet.image.load('assets/weapons/fire-heavy-gun.png')
         explosion_seq = pyglet.image.ImageGrid(explosion, 1, 24)
         explosion_tex_seq = pyglet.image.TextureGrid(explosion_seq)
         return pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .02, loop=False)
@@ -52,7 +53,7 @@ class HeavyBullet(Bullet):
         if self in Global.objects['bullets']: Global.objects['bullets'].remove(self)
 
     def getExplosionAnimation(self):
-        explosion = pyglet.image.load('sprites/weapons/bullet-explosion.png')
+        explosion = pyglet.image.load('assets/weapons/bullet-explosion.png')
         explosion_seq = pyglet.image.ImageGrid(explosion, 1, 20)
         explosion_tex_seq = pyglet.image.TextureGrid(explosion_seq)
         return pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .05, loop=False)

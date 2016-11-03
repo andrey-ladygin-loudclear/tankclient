@@ -3,6 +3,8 @@ from cocos import sprite
 from cocos.actions import MoveBy
 from cocos.rect import Rect
 
+import Global
+
 
 class Tank(sprite.Sprite):
     Gun = None
@@ -32,8 +34,8 @@ class Tank(sprite.Sprite):
         self.Gun.rotation = object.get('gun_rotation')
 
         move_to = self.getMoveBy(object.get('position'))
-        self.do(MoveBy(move_to, 1))
-        self.Gun.do(MoveBy(move_to, 1))
+        self.do(MoveBy(move_to, .1))
+        self.Gun.do(MoveBy(move_to, .1))
 
     def setDefaultState(self):
         self.Gun.image_anchor = (self.Gun.image.width / 2, self.Gun.image.height / 2 + 20)
@@ -58,3 +60,12 @@ class Tank(sprite.Sprite):
 
     def acceptHeavyFire(self):
         self.canHeavyFire = True
+
+    def bullet_fire(self, bullet):
+        Global.TankNetworkListenerConnection.Send({
+            'action': Global.Actions.TANK_FIRE,
+            'type': bullet.type,
+            'pos': bullet.position,
+            'rotation': bullet.rotation,
+            'id': self.id
+        })

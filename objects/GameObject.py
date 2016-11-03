@@ -18,5 +18,4 @@ class GameObject:
 
     def updateBullet(self, object):
         bullet = BulletFactory.getOrCreate(object)
-        bullet.rotation = object.get('rotation')
-        bullet.do(MoveBy(object.get('moveTo'), .2))
+        bullet.update(object)
