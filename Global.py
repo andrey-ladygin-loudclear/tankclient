@@ -27,8 +27,9 @@ def init():
     keyboard = None
     collision_manager = None
 
-class Actions:
+class NetworkActions:
     INIT = '1'
     TANK_MOVE = '2'
     UPDATE = '3'
     TANK_FIRE = '4'
+    DESTROY = '5'

@@ -61,12 +61,24 @@ class Events():
             LayoutFactory.addBullet(newBullet)
             ObjectFactory.addBullet(newBullet)
 
+    def destroy(self, type, id):
+        if type == 'wall':
+            for wall in Global.objects['walls']:
+                if wall.id == id:
+                    Global.objects['walls'].remove(wall)
+                    Global.layers['walls'].remove(wall)
+
+        if type == 'bullet':
+            for bullet in Global.objects['bullets']:
+                if bullet.id == id:
+                    Global.objects['bullets'].remove(bullet)
+                    Global.layers['bullets'].remove(bullet)
 
     def set_walls(self, walls):
         for wall in walls:
             brick_wall = BrickWall()
+            brick_wall.id = wall.get('id')
             brick_wall.update_position(wall.get('position'))
-
 
             Global.objects['walls'].append(brick_wall)
             Global.layers['walls'].add(brick_wall)

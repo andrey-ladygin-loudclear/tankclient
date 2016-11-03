@@ -6,6 +6,7 @@ import cocos.collision_model as cm
 class BrickWall(sprite.Sprite):
     spriteName = 'assets/walls/sprite_bricks_tutorial_1.png'
     health = 20
+    id = 0
 
     def __init__(self):
         super(BrickWall, self).__init__(self.spriteName)

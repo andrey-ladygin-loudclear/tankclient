@@ -31,7 +31,7 @@ class DefaultTankMovingHandlers(actions.Move):
 
         if turns_direction or moving_directions or gun_turns_direction:
             Global.TankNetworkListenerConnection.Send({
-                'action': Global.Actions.TANK_MOVE,
+                'action': Global.NetworkActions.TANK_MOVE,
                 'pos': self.target.position,
                 'turn': turns_direction,
                 'mov': moving_directions,
@@ -63,7 +63,7 @@ class DefaultTankMovingHandlers(actions.Move):
 
             if(self.target.position != new_position):
                 Global.TankNetworkListenerConnection.Send({
-                    'action': Global.Actions.TANK_MOVE,
+                    'action': Global.NetworkActions.TANK_MOVE,
                     'pos': self.target.position,
                     'id': self.target.id
                 })

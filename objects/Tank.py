@@ -63,7 +63,7 @@ class Tank(sprite.Sprite):
 
     def bullet_fire(self, bullet):
         Global.TankNetworkListenerConnection.Send({
-            'action': Global.Actions.TANK_FIRE,
+            'action': Global.NetworkActions.TANK_FIRE,
             'type': bullet.type,
             'pos': bullet.position,
             'rotation': bullet.rotation,

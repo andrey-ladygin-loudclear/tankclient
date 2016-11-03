@@ -13,8 +13,20 @@ class NetworkListener(ConnectionListener):
     def Network(self, data):
         #print(data)
 
-        if(data.get('action') == Global.Actions.INIT):
+        if(data.get('action') == Global.NetworkActions.INIT):
             self.events.set_walls(data.get('walls'))
 
-        if(data.get('action') == Global.Actions.UPDATE):
+        if(data.get('action') == Global.NetworkActions.UPDATE):
             self.events.update(data.get('objects'))
+
+        if(data.get('action') == Global.NetworkActions.DESTROY):
+            self.events.destroy(data.get('type'), data.get('id'))
+
+    def Network_connected(self, data):
+        print "connected to the server"
+
+    def Network_error(self, data):
+        print "error:", data['error'][1]
+
+    def Network_disconnected(self, data):
+        print "disconnected from the server"
