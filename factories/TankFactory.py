@@ -1,4 +1,6 @@
 import Global
+from movingHandlers.DefaultTankMovingHandlers import DefaultTankMovingHandlers
+from movingHandlers.UserTankMovingHandlers import UserTankMovingHandlers
 from objects.tanks.ETank import ETank
 from objects.tanks.KVTank import KVTank
 
@@ -14,8 +16,10 @@ class TankFactory:
 
         tank = TankFactory.createTankByClass(object.get('tankClass'))
         tank.id = object.get('id')
+        tank.setStartPosition(object.get('position'))
 
         if fraction == 'player':
+            tank.do(UserTankMovingHandlers())
             Global.objects['players'].append(tank)
             Global.layers['game'].add(tank)
             Global.layers['game'].add(tank.getGunSprite())

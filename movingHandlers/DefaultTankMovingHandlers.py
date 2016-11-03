@@ -29,6 +29,19 @@ class DefaultTankMovingHandlers(actions.Move):
         moving_directions = Global.keyboard[self.UP] - Global.keyboard[self.DOWN]
         gun_turns_direction = Global.keyboard[self.GUN_RIGHT] - Global.keyboard[self.GUN_LEFT]
 
+        if turns_direction or moving_directions or gun_turns_direction:
+            print('Send')
+            Global.TankNetworkListenerConnection.Send({
+                'action': Global.Actions.TANK_MOVE,
+                'pos': self.target.position,
+                'turn': turns_direction,
+                'mov': moving_directions,
+                'gun_turn': gun_turns_direction,
+                'id': self.target.id
+            })
+
+        return
+
         self.addSpeed(moving_directions)
 
         # Set the object's velocity.
@@ -121,8 +134,8 @@ class DefaultTankMovingHandlers(actions.Move):
         self.target.Gun.position = self.target.position
 
     def setGunRotation(self, gun_turns_direction):
-        self.target.Gun.offset_rotation += self.target.gun_rotation_speed * (gun_turns_direction)
-        self.target.Gun.rotation = self.target.rotation + self.target.Gun.offset_rotation
+        self.target.Gun.gun_rotation += self.target.gun_rotation_speed * (gun_turns_direction)
+        self.target.Gun.rotation = self.target.rotation + self.target.Gun.gun_rotation
 
     def addSpeed(self, moving_directions):
         if moving_directions:

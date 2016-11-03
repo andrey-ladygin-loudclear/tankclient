@@ -120,8 +120,8 @@ class EnemyTankMovingHandlers(actions.Move):
         self.target.Gun.position = self.target.position
 
     def setGunRotation(self, gun_turns_direction):
-        self.target.Gun.offset_rotation += self.target.gun_rotation_speed * (gun_turns_direction)
-        self.target.Gun.rotation = self.target.rotation + self.target.Gun.offset_rotation
+        self.target.Gun.gun_rotation += self.target.gun_rotation_speed * (gun_turns_direction)
+        self.target.Gun.rotation = self.target.rotation + self.target.Gun.gun_rotation
 
     def addSpeed(self, moving_directions):
         if moving_directions:
