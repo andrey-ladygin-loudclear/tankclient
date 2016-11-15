@@ -2,7 +2,7 @@ from events.NetworkListener import NetworkListener
 
 
 def init():
-    global keyboard, dimensions, layers, objects, collision_manager, TankNetworkListenerConnection
+    global keyboard, dimensions, layers, objects, collision_manager, TankNetworkListenerConnection, BulletsNetworkListenerConnection
 
     layers = {
         'game': None,
@@ -24,6 +24,7 @@ def init():
     }
 
     TankNetworkListenerConnection = NetworkListener('localhost', 1332)
+    #BulletsNetworkListenerConnection = NetworkListener('localhost', 1332)
     keyboard = None
     collision_manager = None
 
