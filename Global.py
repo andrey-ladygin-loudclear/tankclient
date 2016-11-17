@@ -1,3 +1,4 @@
+from events.NetworkBulletsListener import NetworkBulletsListener
 from events.NetworkListener import NetworkListener
 
 
@@ -24,7 +25,7 @@ def init():
     }
 
     TankNetworkListenerConnection = NetworkListener('localhost', 1332)
-    #BulletsNetworkListenerConnection = NetworkListener('localhost', 1332)
+    # BulletsNetworkListenerConnection = NetworkBulletsListener('localhost', 1333)
     keyboard = None
     collision_manager = None
 

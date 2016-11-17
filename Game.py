@@ -29,6 +29,9 @@ class Game(cocos.layer.ColorLayer):
         if Global.TankNetworkListenerConnection:
             Global.TankNetworkListenerConnection.Pump()
 
+        if Global.BulletsNetworkListenerConnection:
+            Global.BulletsNetworkListenerConnection.Pump()
+
 def main():
     # Initialize the window.
     Global.init()
