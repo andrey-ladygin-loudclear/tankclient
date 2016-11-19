@@ -15,7 +15,6 @@ from pyglet.window import key
 
 import Global
 
-
 class Game(cocos.layer.ColorLayer):
     is_event_handler = True
 
@@ -28,9 +27,6 @@ class Game(cocos.layer.ColorLayer):
 
         if Global.TankNetworkListenerConnection:
             Global.TankNetworkListenerConnection.Pump()
-
-        if Global.BulletsNetworkListenerConnection:
-            Global.BulletsNetworkListenerConnection.Pump()
 
 def main():
     # Initialize the window.
