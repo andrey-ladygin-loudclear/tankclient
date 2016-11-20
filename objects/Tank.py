@@ -62,7 +62,6 @@ class Tank(sprite.Sprite):
         self.canHeavyFire = True
 
     def bullet_fire(self, bullet):
-        print(bullet.position)
         Global.TankNetworkListenerConnection.Send({
             'action': Global.NetworkActions.TANK_FIRE,
             'type': bullet.type,
