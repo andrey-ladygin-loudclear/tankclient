@@ -17,7 +17,7 @@ class NetworkListener(ConnectionListener):
             self.events.set_walls(data.get('walls'))
 
         if(data.get('action') == Global.NetworkActions.UPDATE):
-            self.events.update(data.get('objects'))
+            self.events.update(data.get('o'))
 
             events = data.get('events')
 

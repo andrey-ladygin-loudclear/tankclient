@@ -8,17 +8,16 @@ from objects.tanks.KVTank import KVTank
 class TankFactory:
 
     @staticmethod
-    def getOrCreate(object):
-        tank = TankFactory.get(object.get('id'))
-        fraction = object.get('fraction')
+    def getOrCreate(id, fraction, position, tank_class):
+        tank = TankFactory.get(id)
 
         if tank: return tank
 
-        tank = TankFactory.createTankByClass(object.get('tankClass'))
-        tank.id = object.get('id')
-        tank.setStartPosition(object.get('position'))
+        tank = TankFactory.createTankByClass(tank_class)
+        tank.id = id
+        tank.setStartPosition(position)
 
-        if fraction == 'player':
+        if fraction == Global.NetworkDataCodes.PLAYER:
             tank.do(UserTankMovingHandlers())
             Global.objects['players'].append(tank)
             Global.layers['game'].add(tank)

@@ -6,14 +6,14 @@ from objects.bullets.standartBullet import StandartBullet
 class BulletFactory:
 
     @staticmethod
-    def getOrCreate(object):
-        bullet = BulletFactory.get(object.get('id'))
+    def getOrCreate(id, position, bullet_class):
+        bullet = BulletFactory.get(id)
 
         if bullet: return bullet
 
-        bullet = BulletFactory.createBulletByClass(object.get('typeClass'))
-        bullet.id = object.get('id')
-        bullet.position = object.get('position')
+        bullet = BulletFactory.createBulletByClass(bullet_class)
+        bullet.id = id
+        bullet.position = position
 
         Global.objects['bullets'].append(bullet)
         Global.layers['bullets'].add(bullet)

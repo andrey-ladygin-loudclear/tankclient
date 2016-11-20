@@ -1,4 +1,3 @@
-from events.NetworkBulletsListener import NetworkBulletsListener
 from events.NetworkListener import NetworkListener
 
 
@@ -28,6 +27,22 @@ def init():
     # BulletsNetworkListenerConnection = NetworkBulletsListener('localhost', 1333)
     keyboard = None
     collision_manager = None
+
+class NetworkDataCodes:
+    TANK_CLASS = 't'
+    FRACTION = 'f'
+    GUN_ROTATION = 'g'
+    POSITION = 'p'
+    ROTATION = 'r'
+    TYPE = 'y'
+    ID = 'i'
+
+    KVTank = 'k'
+    PLAYER = 'p'
+    TANK = 't'
+    BULLET = 'b'
+    STANDART_BULLET = 'sb'
+    HEAVY_BULLET = 'hb'
 
 class NetworkActions:
     INIT = '1'

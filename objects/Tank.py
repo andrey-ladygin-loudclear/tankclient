@@ -29,11 +29,11 @@ class Tank(sprite.Sprite):
     def getGunSprite(self):
         return self.Gun
 
-    def update(self, object):
-        self.rotation = object.get('rotation')
-        self.Gun.rotation = object.get('gun_rotation')
+    def update(self, position, rotation, gun_rotation):
+        self.rotation = rotation
+        self.Gun.rotation = gun_rotation
 
-        move_to = self.getMoveBy(object.get('position'))
+        move_to = self.getMoveBy(position)
         self.do(MoveBy(move_to, .1))
         self.Gun.do(MoveBy(move_to, .1))
 

@@ -101,9 +101,9 @@ class Bullet(sprite.Sprite):
         anim.scale = 0.5
         return anim
 
-    def update(self, object):
-        self.rotation = object.get('rotation')
-        move_by = self.getMoveBy(object.get('position'))
+    def update(self, position, rotation):
+        self.rotation = rotation
+        move_by = self.getMoveBy(position)
         self.do(MoveBy(move_by, .15))
 
     def getMoveBy(self, new_position):
