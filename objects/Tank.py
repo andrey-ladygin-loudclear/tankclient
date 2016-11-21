@@ -1,9 +1,14 @@
 import operator
+
+import math
+from threading import Timer
+
 from cocos import sprite
 from cocos.actions import MoveBy
 from cocos.rect import Rect
 
 import Global
+from objects.animations.standartBulletFireAnimation import standartBulletFireAnimation
 
 
 class Tank(sprite.Sprite):
@@ -60,6 +65,25 @@ class Tank(sprite.Sprite):
 
     def acceptHeavyFire(self):
         self.canHeavyFire = True
+
+    def fireAnimation(self):
+        cos_x = math.cos(math.radians(self.rotation - 180))
+        sin_x = math.sin(math.radians(self.rotation))
+
+        x = self.x + self.bullets_fired_offset_x * sin_x + self.bullets_fired_offset_y * cos_x
+        y = self.y - self.bullets_fired_offset_x * cos_x + self.bullets_fired_offset_y * sin_x
+        anim_x = x + self.bullets_fired_animation_offset_x * sin_x + self.bullets_fired_animation_offset_y * cos_x
+        anim_y = y - self.bullets_fired_animation_offset_x * cos_x + self.bullets_fired_animation_offset_y * sin_x
+        position = (anim_x, anim_y)
+        rotation = self.rotation
+
+        animationObject = standartBulletFireAnimation()
+
+        animation = animationObject.getAnimation()
+        anim = animationObject.getSprite(position, rotation)
+        Global.layers['game'].add(anim)
+        t = Timer(animation.get_duration(), lambda: Global.layers['game'].remove(anim))
+        t.start()
 
     def bullet_fire(self, bullet):
         Global.TankNetworkListenerConnection.Send({

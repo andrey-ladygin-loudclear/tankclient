@@ -13,6 +13,7 @@ from cocos.actions import Action, MoveBy
 import Global
 from events.Explosion import Explosion
 from movingHandlers.BulletMovingHandlers import BulletMovingHandlers
+from objects.animations.standartBulletFireAnimation import standartBulletFireAnimation
 
 
 class Bullet(sprite.Sprite):
@@ -48,7 +49,7 @@ class Bullet(sprite.Sprite):
         )
 
         #animation = pyglet.image.load_animation('sprites/weapons/Explosion2.gif')
-        #anim = sprite.Sprite(animation)
+        #anim = sprite.Sprite(animation)getExplosionAnimation
         #print(animation.get_duration())
         #anim.sprite_move_action = None
         #animation.(lambda x: Global.layers['game'])
@@ -61,13 +62,11 @@ class Bullet(sprite.Sprite):
         anim_x = x + self.bullets_fired_animation_offset_x * sin_x + self.bullets_fired_animation_offset_y * cos_x
         anim_y = y - self.bullets_fired_animation_offset_x * cos_x + self.bullets_fired_animation_offset_y * sin_x
 
-        animation = self.getFireAnimation()
-        anim = self.getFireAnimationSprite(animation, anim_x, anim_y)
-        Global.layers['game'].add(anim)
-        #anim.do(removeAfterComplete())
-
-        t = Timer(animation.get_duration(), lambda: Global.layers['game'].remove(anim))
-        t.start()
+        # animation = self.getFireAnimation()
+        # animq = self.getFireAnimationSprite(animation, anim_x, anim_y)
+        # Global.layers['game'].add(anim)
+        # t = Timer(animation.get_duration(), lambda: Global.layers['game'].remove(anim))
+        # t.start()
 
         #montage Explosion2.gif -tile x1 -geometry +0+0 -alpha On -background "rgba(0,0,0,0.0)" -quality 100 test.png
 

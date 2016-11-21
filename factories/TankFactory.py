@@ -16,6 +16,7 @@ class TankFactory:
         tank = TankFactory.createTankByClass(tank_class)
         tank.id = id
         tank.setStartPosition(position)
+       # tank.fireAnimation()
 
         if fraction == Global.NetworkDataCodes.PLAYER:
             tank.do(UserTankMovingHandlers())
