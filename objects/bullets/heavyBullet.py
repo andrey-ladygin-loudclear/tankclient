@@ -22,7 +22,6 @@ class HeavyBullet(Bullet):
 
     speed = 800
 
-
     bullets_fired_offset_x = 0
     bullets_fired_offset_y = 20
 

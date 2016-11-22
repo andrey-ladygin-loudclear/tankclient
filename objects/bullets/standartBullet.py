@@ -19,7 +19,7 @@ class StandartBullet(Bullet):
     velocity = (0, 0)
     fireLength = 1000
 
-    speed = 600
+    speed = 30
 
     bullets_fired_offset_x = 6
     bullets_fired_offset_y = 20

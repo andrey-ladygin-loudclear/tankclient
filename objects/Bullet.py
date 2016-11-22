@@ -1,6 +1,7 @@
 import math
 import random
 from threading import Timer
+from time import time, sleep
 
 import pyglet
 
@@ -36,17 +37,13 @@ class Bullet(sprite.Sprite):
 
         x = x + self.bullets_fired_offset_x * sin_x + self.bullets_fired_offset_y * cos_x
         y = y - self.bullets_fired_offset_x * cos_x + self.bullets_fired_offset_y * sin_x
-
-        angle_of_deflection = self.getAngleDeflection()
         self.position = (x, y)
-        self.startPosition = (x, y)
-        self.do(BulletMovingHandlers(self.speed, angle_of_deflection))
 
-        self.cshape = cm.AARectShape(
-            self.position,
-            self.width // 2,
-            self.height // 2
-        )
+        #angle_of_deflection = self.getAngleDeflection()
+
+        #self.startPosition = (x, y)
+        #self.do(BulletMovingHandlers())
+
 
         #animation = pyglet.image.load_animation('sprites/weapons/Explosion2.gif')
         #anim = sprite.Sprite(animation)getExplosionAnimation
@@ -110,6 +107,22 @@ class Bullet(sprite.Sprite):
         new_x, new_y = new_position
         return (new_x - curr_x, new_y - curr_y)
 
+    def setMovengHendler(self):
+        while True:
+            self.nextCoord()
+            self.do(MoveBy(self.position, .1))
+            sleep(.1)
+
+    def setPosition(self, new_x, new_y):
+        self.position = (new_x, new_y)
+
+    def nextCoord(self):
+        angle = self.rotation
+        curr_x, curr_y = self.position
+        time_delta = (time() - self.last_update_time)
+        new_x = self.speed * time_delta * math.cos(math.radians(angle - 180 + self.angle_of_deflection)) + curr_x
+        new_y = self.speed * time_delta * math.sin(math.radians(angle + self.angle_of_deflection)) + curr_y
+        self.position = (new_x, new_y)
 
 class removeAfterComplete(Action):
     def step(self, dt):

@@ -1,3 +1,5 @@
+from time import time
+
 from PodSixNet.Connection import ConnectionListener, connection
 
 import Global
@@ -11,22 +13,16 @@ class NetworkListener(ConnectionListener):
         self.Connect((host, port))
 
     def Network(self, data):
-        #print('NetworkBulletsListener')
-
-        if(data.get('action') == Global.NetworkActions.INIT):
+        if data.get('action') == Global.NetworkActions.INIT:
             self.events.set_walls(data.get('walls'))
 
-        if(data.get('action') == Global.NetworkActions.UPDATE):
-            self.events.update(data.get('o'))
+        if data.get('action') == Global.NetworkActions.UPDATE:
+            self.events.gameObject.update(data)
 
-            events = data.get('events')
+        if data.get('action') == Global.NetworkActions.TANK_FIRE:
+            self.events.gameObject.fire(data)
 
-            if events:
-                for event in events:
-                    if(event.get('action') == Global.NetworkActions.DESTROY):
-                        pass#self.events.destroy(event.get('type'), event.get('id'))
-
-        if(data.get('action') == Global.NetworkActions.DESTROY):
+        if data.get('action') == Global.NetworkActions.DESTROY:
             self.events.destroy(data.get('type'), data.get('id'))
 
     #https://www.youtube.com/watch?v=AdG_ITCFHDI EXPLODIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
@@ -35,7 +31,7 @@ class NetworkListener(ConnectionListener):
         print "connected to the server"
 
     def Network_error(self, data):
-        print "error:", data['error'][1]
+        print(data['error'])
 
     def Network_disconnected(self, data):
         print "disconnected from the server"
