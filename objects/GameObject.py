@@ -45,6 +45,7 @@ class GameObject:
         bullet = BulletFactory.createBulletByClass(bullet_class)
         bullet.id = id
         bullet.position = position
+        bullet.start_position = position
         bullet.rotation = rotation
         bullet.last_update_time = last_update_time
         bullet.angle_of_deflection = angle_of_deflection

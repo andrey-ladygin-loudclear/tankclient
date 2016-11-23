@@ -58,7 +58,8 @@ class KVTank(Tank):
             x, y = self.Gun.position
 
             bullet = StandartBullet()
-            bullet.update_rotation(self.Gun.rotation)
+            bullet.rotation = self.Gun.rotation - 90
+
             bullet.update_position(x, y)
 
             self.bullet_fire(bullet)

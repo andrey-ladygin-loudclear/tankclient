@@ -28,9 +28,6 @@ class Bullet(sprite.Sprite):
     def __init__(self, spriteName):
         super(Bullet, self).__init__(spriteName)
 
-    def update_rotation(self, rotation):
-        self.rotation = rotation - 90
-
     def update_position(self, x, y):
         cos_x = math.cos(math.radians(self.rotation - 180))
         sin_x = math.sin(math.radians(self.rotation))
@@ -97,32 +94,6 @@ class Bullet(sprite.Sprite):
         anim.scale = 0.5
         return anim
 
-    def update(self, position, rotation):
-        self.rotation = rotation
-        move_by = self.getMoveBy(position)
-        self.do(MoveBy(move_by, .15))
-
-    def getMoveBy(self, new_position):
-        curr_x, curr_y = self.position
-        new_x, new_y = new_position
-        return (new_x - curr_x, new_y - curr_y)
-
-    def setMovengHendler(self):
-        while True:
-            self.nextCoord()
-            self.do(MoveBy(self.position, .1))
-            sleep(.1)
-
-    def setPosition(self, new_x, new_y):
-        self.position = (new_x, new_y)
-
-    def nextCoord(self):
-        angle = self.rotation
-        curr_x, curr_y = self.position
-        time_delta = (time() - self.last_update_time)
-        new_x = self.speed * time_delta * math.cos(math.radians(angle - 180 + self.angle_of_deflection)) + curr_x
-        new_y = self.speed * time_delta * math.sin(math.radians(angle + self.angle_of_deflection)) + curr_y
-        self.position = (new_x, new_y)
 
 class removeAfterComplete(Action):
     def step(self, dt):

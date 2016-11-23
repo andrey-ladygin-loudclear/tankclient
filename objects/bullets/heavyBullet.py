@@ -20,7 +20,7 @@ class HeavyBullet(Bullet):
     velocity = (0, 0)
     fireLength = 1000
 
-    speed = 800
+    speed = 500
 
     bullets_fired_offset_x = 0
     bullets_fired_offset_y = 20
