@@ -67,32 +67,9 @@ class Bullet(sprite.Sprite):
         #animation = pyglet.image.load_animation('animation.gif')
         #frames = [frame.image for frame in animation.frames]
 
-    def explosion(self):
-        animation = self.getExplosionAnimation()
-        anim = self.getExplosionAnimationSprite(animation)
-
-        Global.layers['game'].add(anim)
-
-        self.removeAnimation()
-
-        t = Timer(animation.get_duration(), lambda: Global.layers['game'].remove(anim))
-        t.start()
-
-        return Explosion(self)
-
-    def getExplosionAnimation(self):
-        explosion = pyglet.image.load('sprites/weapons/bullet-explosion.png')
-        explosion_seq = pyglet.image.ImageGrid(explosion, 1, 20)
-        explosion_tex_seq = pyglet.image.TextureGrid(explosion_seq)
-        return pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .05, loop=False)
-
-    def getExplosionAnimationSprite(self, animation):
-        anim = sprite.Sprite(animation)
-        anim.position = self.position
-        anim.rotation = self.rotation - 90
-        anim.image_anchor = (animation.get_max_width() / 2, animation.get_max_height() / 4)
-        anim.scale = 0.5
-        return anim
+    def destroy(self):
+        if self in Global.layers['bullets']: Global.layers['bullets'].remove(self)
+        if self in Global.objects['bullets']: Global.objects['bullets'].remove(self)
 
 
 class removeAfterComplete(Action):

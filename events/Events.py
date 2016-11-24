@@ -61,7 +61,7 @@ class Events():
             LayoutFactory.addBullet(newBullet)
             ObjectFactory.addBullet(newBullet)
 
-    def destroy(self, type, id):
+    def destroy(self, data):
         if type == 'wall':
             for wall in Global.objects['walls']:
                 if wall.id == id:

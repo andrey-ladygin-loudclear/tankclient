@@ -23,7 +23,7 @@ class NetworkListener(ConnectionListener):
             self.events.gameObject.fire(data)
 
         if data.get('action') == Global.NetworkActions.DESTROY:
-            self.events.destroy(data.get('type'), data.get('id'))
+            self.events.gameObject.destroy(data)
 
     #https://www.youtube.com/watch?v=AdG_ITCFHDI EXPLODIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 

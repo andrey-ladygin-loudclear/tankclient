@@ -6,15 +6,17 @@ from cocos import sprite
 import Global
 
 
-class heavyBulletFireAnimation:
+class explosionHeavyBulletAnimation:
 
     def __init__(self):
-        explosion = pyglet.image.load('assets/weapons/fire-small-gun.png')
-        explosion_seq = pyglet.image.ImageGrid(explosion, 1, 3)
+        explosion = pyglet.image.load('assets/weapons/bullet-explosion.png')
+        explosion_seq = pyglet.image.ImageGrid(explosion, 1, 20)
         explosion_tex_seq = pyglet.image.TextureGrid(explosion_seq)
-        self.animation = pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .02, loop=False)
+        self.animation = pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .05, loop=False)
+
         self.anim = sprite.Sprite(self.animation)
-        self.anim.scale = 0.2
+        self.anim.image_anchor = (self.animation.get_max_width() / 2, self.animation.get_max_height() / 4)
+        self.anim.scale = 0.5
 
     def getAnimation(self):
         return self.animation
