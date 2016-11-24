@@ -38,6 +38,7 @@ class NetworkDataCodes:
     ROTATION = 'r'
     TYPE = 'y'
     ID = 'i'
+    PARENT_ID = 'pi'
 
     KVTank = 'k'
     PLAYER = 'p'

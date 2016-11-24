@@ -9,6 +9,7 @@ from cocos.rect import Rect
 
 import Global
 from objects.animations.standartBulletFireAnimation import standartBulletFireAnimation
+from objects.bullets.heavyBullet import HeavyBullet
 
 
 class Tank(sprite.Sprite):
@@ -84,6 +85,26 @@ class Tank(sprite.Sprite):
         Global.layers['game'].add(anim)
         t = Timer(animation.get_duration(), lambda: Global.layers['game'].remove(anim))
         t.start()
+
+    def getBulletStartPosition(self, bullet):
+        cos_x = math.cos(math.radians(self.Gun.rotation - 180))
+        sin_x = math.sin(math.radians(self.Gun.rotation))
+
+        x, y = self.position
+        anim_x = x + self.bullets_fired_animation_offset_x * sin_x + self.bullets_fired_animation_offset_y * cos_x
+        anim_y = y - self.bullets_fired_animation_offset_x * cos_x + self.bullets_fired_animation_offset_y * sin_x
+
+        if isinstance(bullet, HeavyBullet):
+            return (anim_x, anim_y)
+
+        bullets_fired_offset_x = 6
+        bullets_fired_offset_y = 20
+
+        bullets_fired_animation_offset_x = 0
+        bullets_fired_animation_offset_y = 5
+
+    def getFireAnimationPosition(self, bullet):
+        pass
 
     def bullet_fire(self, bullet):
         Global.TankNetworkListenerConnection.Send({

@@ -3,6 +3,7 @@ from time import time
 from cocos.actions import MoveBy
 
 import Global
+from factories.AnimationFactory import AnimationFactory
 from factories.BulletFactory import BulletFactory
 from factories.TankFactory import TankFactory
 from movingHandlers.BulletMovingHandlers import BulletMovingHandlers
@@ -34,6 +35,7 @@ class GameObject:
 
     def createBullet(self, object, bullet_class):
         id = object.get(Global.NetworkDataCodes.ID)
+        parent_id = object.get(Global.NetworkDataCodes.PARENT_ID)
         position = object.get(Global.NetworkDataCodes.POSITION)
         rotation = object.get(Global.NetworkDataCodes.ROTATION)
 
@@ -44,11 +46,18 @@ class GameObject:
 
         bullet = BulletFactory.createBulletByClass(bullet_class)
         bullet.id = id
+        bullet.parent_id = parent_id
         bullet.position = position
         bullet.start_position = position
         bullet.rotation = rotation
         bullet.last_update_time = last_update_time
         bullet.angle_of_deflection = angle_of_deflection
+
+        firedTank = TankFactory.get(parent_id)
+        #gun_position = firedTank.getGunPosition()
+
+        animation = AnimationFactory.createAnimationByBulletClass(bullet_class)
+        animation.appendAnimationToLayer(position, rotation)
 
         BulletFactory.addToObjects(bullet)
 

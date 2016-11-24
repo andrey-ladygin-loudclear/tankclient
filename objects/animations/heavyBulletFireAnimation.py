@@ -20,13 +20,6 @@ class standartBulletFireAnimation:
         return self.animation
 
     def getSprite(self, position, rotation):
-        # cos_x = math.cos(math.radians(self.rotation - 180))
-        # sin_x = math.sin(math.radians(self.rotation))
-        # x = x + self.bullets_fired_offset_x * sin_x + self.bullets_fired_offset_y * cos_x
-        # y = y - self.bullets_fired_offset_x * cos_x + self.bullets_fired_offset_y * sin_x
-        # anim_x = x + self.bullets_fired_animation_offset_x * sin_x + self.bullets_fired_animation_offset_y * cos_x
-        # anim_y = y - self.bullets_fired_animation_offset_x * cos_x + self.bullets_fired_animation_offset_y * sin_x
-
         self.anim.position = position
         self.anim.rotation = rotation - 90
         return self.anim
