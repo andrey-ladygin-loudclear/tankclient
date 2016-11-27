@@ -9,8 +9,8 @@ import Global
 class heavyBulletFireAnimation:
 
     def __init__(self):
-        explosion = pyglet.image.load('assets/weapons/fire-small-gun.png')
-        explosion_seq = pyglet.image.ImageGrid(explosion, 1, 3)
+        explosion = pyglet.image.load('assets/weapons/fire-heavy-gun.png')
+        explosion_seq = pyglet.image.ImageGrid(explosion, 1, 24)
         explosion_tex_seq = pyglet.image.TextureGrid(explosion_seq)
         self.animation = pyglet.image.Animation.from_image_sequence(explosion_tex_seq, .02, loop=False)
         self.anim = sprite.Sprite(self.animation)

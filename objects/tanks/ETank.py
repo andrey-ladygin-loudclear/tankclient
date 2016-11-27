@@ -34,11 +34,9 @@ class ETank(Tank):
         if self.canHeavyFire:
             self.canHeavyFire = False
 
-            x, y = self.Gun.position
-
             bullet = HeavyBullet()
-            bullet.update_rotation(self.Gun.rotation)
-            bullet.update_position(x, y)
+            bullet.rotation = self.Gun.getRotation()
+            bullet.position = self.Gun.heavyFirePosition()
 
             self.bullet_fire(bullet)
 
@@ -50,11 +48,9 @@ class ETank(Tank):
         if self.canFire:
             self.canFire = False
 
-            x, y = self.Gun.position
-
             bullet = StandartBullet()
-            bullet.update_rotation(self.Gun.rotation)
-            bullet.update_position(x, y)
+            bullet.rotation = self.Gun.getRotation()
+            bullet.position = self.Gun.standartFirePosition()
 
             self.bullet_fire(bullet)
 

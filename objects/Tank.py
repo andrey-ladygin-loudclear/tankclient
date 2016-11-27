@@ -8,8 +8,10 @@ from cocos.actions import MoveBy
 from cocos.rect import Rect
 
 import Global
+from objects.Gun import Gun
 from objects.animations.standartBulletFireAnimation import standartBulletFireAnimation
 from objects.bullets.heavyBullet import HeavyBullet
+from objects.bullets.standartBullet import StandartBullet
 
 
 class Tank(sprite.Sprite):
@@ -30,7 +32,7 @@ class Tank(sprite.Sprite):
         return Rect(bottom_left_x, bottom_left_y, self.width, self.height)
 
     def setGunSprite(self, spriteName):
-        self.Gun = sprite.Sprite(spriteName)
+        self.Gun = Gun(spriteName)
 
     def getGunSprite(self):
         return self.Gun
@@ -66,45 +68,6 @@ class Tank(sprite.Sprite):
 
     def acceptHeavyFire(self):
         self.canHeavyFire = True
-
-    def fireAnimation(self):
-        cos_x = math.cos(math.radians(self.rotation - 180))
-        sin_x = math.sin(math.radians(self.rotation))
-
-        x = self.x + self.bullets_fired_offset_x * sin_x + self.bullets_fired_offset_y * cos_x
-        y = self.y - self.bullets_fired_offset_x * cos_x + self.bullets_fired_offset_y * sin_x
-        anim_x = x + self.bullets_fired_animation_offset_x * sin_x + self.bullets_fired_animation_offset_y * cos_x
-        anim_y = y - self.bullets_fired_animation_offset_x * cos_x + self.bullets_fired_animation_offset_y * sin_x
-        position = (anim_x, anim_y)
-        rotation = self.rotation
-
-        animationObject = standartBulletFireAnimation()
-
-        animation = animationObject.getAnimation()
-        anim = animationObject.getSprite(position, rotation)
-        Global.layers['game'].add(anim)
-        t = Timer(animation.get_duration(), lambda: Global.layers['game'].remove(anim))
-        t.start()
-
-    def getBulletStartPosition(self, bullet):
-        cos_x = math.cos(math.radians(self.Gun.rotation - 180))
-        sin_x = math.sin(math.radians(self.Gun.rotation))
-
-        x, y = self.position
-        anim_x = x + self.bullets_fired_animation_offset_x * sin_x + self.bullets_fired_animation_offset_y * cos_x
-        anim_y = y - self.bullets_fired_animation_offset_x * cos_x + self.bullets_fired_animation_offset_y * sin_x
-
-        if isinstance(bullet, HeavyBullet):
-            return (anim_x, anim_y)
-
-        bullets_fired_offset_x = 6
-        bullets_fired_offset_y = 20
-
-        bullets_fired_animation_offset_x = 0
-        bullets_fired_animation_offset_y = 5
-
-    def getFireAnimationPosition(self, bullet):
-        pass
 
     def bullet_fire(self, bullet):
         Global.TankNetworkListenerConnection.Send({

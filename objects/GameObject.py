@@ -56,14 +56,15 @@ class GameObject:
         bullet.angle_of_deflection = angle_of_deflection
 
         firedTank = TankFactory.get(parent_id)
-        #gun_position = firedTank.getGunPosition()
 
         if isinstance(bullet, StandartBullet):
             animation = standartBulletFireAnimation()
+            animatiom_position = firedTank.Gun.standartFireAnimationPosition()
         else:
             animation = heavyBulletFireAnimation()
+            animatiom_position = firedTank.Gun.heavyFireAnimationPosition()
 
-        animation.appendAnimationToLayer(position, rotation)
+        animation.appendAnimationToLayer(animatiom_position, rotation)
 
         BulletFactory.addToObjects(bullet)
 
