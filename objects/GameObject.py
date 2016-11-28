@@ -1,5 +1,6 @@
 from time import time
 
+from cocos import draw
 from cocos.actions import MoveBy
 
 import Global
@@ -29,6 +30,18 @@ class GameObject:
 
         tank = TankFactory.getOrCreate(id, fraction, position, tank_class)
         tank.update(position, rotation, gun_rotation)
+
+        # Global.layers['test'] = []
+        # x, y = position
+        # w, h = (46//2, 46//2)
+        # line1 = draw.Line((x - w, y - h), (x + w, y - h), (255,255,255,255))
+        # line2 = draw.Line((x - w, y + h), (x + w, y + h), (255,255,255,255))
+        # line3 = draw.Line((x + w, y + h), (x - w, y + h), (255,255,255,255))
+        # line4 = draw.Line((x - w, y + h), (x + w, y - h), (255,255,255,255))
+        # Global.layers['game'].add(line1)
+        # Global.layers['game'].add(line2)
+        # Global.layers['game'].add(line3)
+        # Global.layers['game'].add(line4)
 
     def fire(self, object):
         id = object.get(Global.NetworkDataCodes.ID)

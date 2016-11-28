@@ -40,10 +40,12 @@ def main():
     Global.layers['bullets'] = BatchNode()
     Global.layers['walls'] = BatchNode()
     Global.layers['enemies'] = BatchNode()
+    Global.layers['test'] = BatchNode()
 
     Global.layers['game'].add(Global.layers['bullets'])
     Global.layers['game'].add(Global.layers['walls'])
     Global.layers['game'].add(Global.layers['enemies'])
+    Global.layers['game'].add(Global.layers['test'])
 
     # Create a scene and set its initial layer.
     main_scene = scene.Scene(Global.layers['game'])

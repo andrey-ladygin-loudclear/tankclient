@@ -9,6 +9,7 @@ def init():
         'walls': [],
         'bullets': [],
         'enemies': [],
+        'test': [],
     }
 
     objects = {
