@@ -19,6 +19,9 @@ class NetworkListener(ConnectionListener):
         if data.get('action') == Global.NetworkActions.UPDATE:
             self.events.gameObject.update(data)
 
+        if data.get('action') == Global.NetworkActions.TEST:
+            self.events.gameObject.test(data)
+
         if data.get('action') == Global.NetworkActions.TANK_FIRE:
             self.events.gameObject.fire(data)
 

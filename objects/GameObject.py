@@ -1,5 +1,6 @@
 from time import time
 
+import cocos
 from cocos import draw
 from cocos.actions import MoveBy
 
@@ -42,6 +43,21 @@ class GameObject:
         # Global.layers['game'].add(line2)
         # Global.layers['game'].add(line3)
         # Global.layers['game'].add(line4)
+
+    def test(self, object):
+        if object.get(Global.NetworkDataCodes.TYPE) == 'clear':
+            Global.layers['panel'] = cocos.layer.Layer()
+            return
+
+        position = object.get(Global.NetworkDataCodes.POSITION)
+        label = cocos.text.Label(
+            '.',
+            font_name='Times New Roman',
+            font_size=32,
+            anchor_x='center', anchor_y='center'
+        )
+        label.position = position
+        Global.layers['panel'].add(label)
 
     def fire(self, object):
         id = object.get(Global.NetworkDataCodes.ID)

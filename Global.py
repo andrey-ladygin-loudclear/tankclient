@@ -6,6 +6,7 @@ def init():
 
     layers = {
         'game': None,
+        'panel': None,
         'walls': [],
         'bullets': [],
         'enemies': [],
@@ -54,3 +55,4 @@ class NetworkActions:
     UPDATE = '3'
     TANK_FIRE = '4'
     DESTROY = '5'
+    TEST = '6'
