@@ -45,19 +45,13 @@ class GameObject:
         # Global.layers['game'].add(line4)
 
     def test(self, object):
-        if object.get(Global.NetworkDataCodes.TYPE) == 'clear':
-            Global.layers['panel'] = cocos.layer.Layer()
-            return
+        #Global.layers['panel'] = cocos.layer.Layer()
 
         position = object.get(Global.NetworkDataCodes.POSITION)
-        label = cocos.text.Label(
-            '.',
-            font_name='Times New Roman',
-            font_size=32,
-            anchor_x='center', anchor_y='center'
-        )
-        label.position = position
-        Global.layers['panel'].add(label)
+
+        for point in position:
+            line = draw.Line(point[0], point[1], (255,255,255,255))
+            #Global.layers['test'].add(line)
 
     def fire(self, object):
         id = object.get(Global.NetworkDataCodes.ID)
