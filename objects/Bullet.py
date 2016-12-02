@@ -36,8 +36,6 @@ class Bullet(sprite.Sprite):
         y = y - self.bullets_fired_offset_x * cos_x + self.bullets_fired_offset_y * sin_x
         self.position = (x, y)
 
-        #angle_of_deflection = self.getAngleDeflection()
-
         #self.startPosition = (x, y)
         #self.do(BulletMovingHandlers())
 

@@ -36,7 +36,6 @@ class NetworkDataCodes:
     GUN_ROTATION = 'g'
     POSITION = 'p'
     LAST_UPDATE_TIME = 'lt'
-    ANGLE_OF_DEFLECTION = 'aod'
     ROTATION = 'r'
     TYPE = 'y'
     ID = 'i'
@@ -48,6 +47,7 @@ class NetworkDataCodes:
     BULLET = 'b'
     STANDART_BULLET = 'sb'
     HEAVY_BULLET = 'hb'
+    WALL = 'w'
 
 class NetworkActions:
     INIT = '1'

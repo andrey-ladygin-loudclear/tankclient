@@ -2,6 +2,8 @@ import math
 from cocos import sprite
 import cocos.collision_model as cm
 
+import Global
+
 
 class BrickWall(sprite.Sprite):
     spriteName = 'assets/walls/sprite_bricks_tutorial_1.png'
@@ -29,3 +31,7 @@ class BrickWall(sprite.Sprite):
         #print('range: ' + str(range))
         #print('damage: ' + str(bullet.damage * bullet.damage / range ))
         self.health -= bullet.damage / range
+
+    def destroy(self):
+        if self in Global.objects['walls']: Global.objects['walls'].remove(self)
+        if self in Global.layers['walls']: Global.layers['walls'].remove(self)

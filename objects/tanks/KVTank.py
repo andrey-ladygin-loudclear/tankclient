@@ -40,7 +40,7 @@ class KVTank(Tank):
             self.canHeavyFire = False
 
             bullet = HeavyBullet()
-            bullet.rotation = self.Gun.getRotation()
+            bullet.rotation = self.Gun.getRotation() + self.Gun.getHeavyGunAngleDeflection()
             bullet.position = self.Gun.heavyFirePosition()
 
             self.bullet_fire(bullet)
@@ -54,7 +54,7 @@ class KVTank(Tank):
             self.canFire = False
 
             bullet = StandartBullet()
-            bullet.rotation = self.Gun.getRotation()
+            bullet.rotation = self.Gun.getRotation() + self.Gun.getStandartGunAngleDeflection()
             bullet.position = self.Gun.standartFirePosition()
 
             self.bullet_fire(bullet)

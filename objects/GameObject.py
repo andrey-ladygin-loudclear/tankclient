@@ -8,6 +8,7 @@ import Global
 from factories.AnimationFactory import AnimationFactory
 from factories.BulletFactory import BulletFactory
 from factories.TankFactory import TankFactory
+from factories.WallFactory import WallFactory
 from movingHandlers.BulletMovingHandlers import BulletMovingHandlers
 from objects.animations.ExplosionHeavyBulletAnimation import explosionHeavyBulletAnimation
 from objects.animations.ExplosionStandartBulletAnimation import explosionStandartBulletAnimation
@@ -18,6 +19,8 @@ from objects.bullets.standartBullet import StandartBullet
 
 
 class GameObject:
+    testObjects = []
+
     def update(self, object):
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.KVTank:
             self.updateTank(object, 'KVTank')
@@ -47,11 +50,16 @@ class GameObject:
     def test(self, object):
         #Global.layers['panel'] = cocos.layer.Layer()
 
+        for tobj in self.testObjects:
+            self.testObjects.remove(tobj)
+            Global.layers['panel'].remove(tobj)
+
         position = object.get(Global.NetworkDataCodes.POSITION)
 
         for point in position:
             line = draw.Line(point[0], point[1], (255,255,255,255))
-            #Global.layers['test'].add(line)
+            self.testObjects.append(line)
+            Global.layers['panel'].add(line)
 
     def fire(self, object):
         id = object.get(Global.NetworkDataCodes.ID)
@@ -61,8 +69,6 @@ class GameObject:
 
         last_update_time = object.get(Global.NetworkDataCodes.LAST_UPDATE_TIME)
         last_update_time = float(last_update_time)
-
-        angle_of_deflection = object.get(Global.NetworkDataCodes.ANGLE_OF_DEFLECTION)
 
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.STANDART_BULLET:
             bullet = StandartBullet()
@@ -76,7 +82,6 @@ class GameObject:
         bullet.start_position = position
         bullet.rotation = rotation
         bullet.last_update_time = last_update_time
-        bullet.angle_of_deflection = angle_of_deflection
 
         firedTank = TankFactory.get(parent_id)
 
@@ -95,6 +100,12 @@ class GameObject:
         #bullet.setMovengHendler()
 
     def destroy(self, object):
+        if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.WALL:
+            id = object.get(Global.NetworkDataCodes.ID)
+            #position = object.get(Global.NetworkDataCodes.POSITION)
+            wall = WallFactory.get(id)
+            wall.destroy()
+
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.STANDART_BULLET or \
                         object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.HEAVY_BULLET:
             id = object.get(Global.NetworkDataCodes.ID)

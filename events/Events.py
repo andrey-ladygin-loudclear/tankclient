@@ -77,9 +77,9 @@ class Events():
     def set_walls(self, walls):
         for wall in walls:
             brick_wall = BrickWall()
-            brick_wall.id = wall.get('id')
-            brick_wall.update_position(wall.get('position'))
+            brick_wall.id = wall.get(Global.NetworkDataCodes.ID)
+            brick_wall.update_position(wall.get(Global.NetworkDataCodes.POSITION))
 
             Global.objects['walls'].append(brick_wall)
             Global.layers['walls'].add(brick_wall)
-            Global.collision_manager.add(brick_wall)
+            #Global.collision_manager.add(brick_wall)

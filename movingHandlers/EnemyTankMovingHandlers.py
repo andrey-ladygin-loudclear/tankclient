@@ -95,7 +95,7 @@ class EnemyTankMovingHandlers(actions.Move):
         return math.sqrt(deltax + deltay)
 
     def getAngle(self, x1, y1, x2, y2):
-        deltaX = x2 - x1
+        deltaX = x2 - x1qq
         deltaY = y2 - y1
         rad = math.atan2(deltaX, deltaY)
         return rad * (180 / math.pi) + 180

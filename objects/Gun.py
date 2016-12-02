@@ -1,4 +1,6 @@
 import math
+import random
+
 from cocos import sprite
 
 
@@ -16,6 +18,12 @@ class Gun(sprite.Sprite):
 
     def __init__(self, spriteName):
         super(Gun, self).__init__(spriteName)
+
+    def getHeavyGunAngleDeflection(self):
+        return random.randrange(-200, 200) / 100
+
+    def getStandartGunAngleDeflection(self):
+        return random.randrange(-500, 500) / 100
 
     def heavyFirePosition(self):
         cos_x = math.cos(math.radians(self.rotation - 180))

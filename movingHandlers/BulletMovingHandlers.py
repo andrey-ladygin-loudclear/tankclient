@@ -16,6 +16,6 @@ class BulletMovingHandlers(actions.Move):
         angle = self.target.rotation
         curr_x, curr_y = self.target.start_position
         time_delta = (time() - self.target.last_update_time)
-        new_x = self.target.speed * time_delta * math.cos(math.radians(angle - 180 + self.target.angle_of_deflection)) + curr_x
-        new_y = self.target.speed * time_delta * math.sin(math.radians(angle + self.target.angle_of_deflection)) + curr_y
+        new_x = self.target.speed * time_delta * math.cos(math.radians(angle - 180)) + curr_x
+        new_y = self.target.speed * time_delta * math.sin(math.radians(angle)) + curr_y
         self.target.position = (new_x, new_y)

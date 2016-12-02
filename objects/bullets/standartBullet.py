@@ -20,13 +20,10 @@ class StandartBullet(Bullet):
     velocity = (0, 0)
     fireLength = 1000
 
-    speed = 300
+    speed = 400
 
     def __init__(self):
         super(StandartBullet, self).__init__(self.spriteName)
-
-    def getAngleDeflection(self):
-        return random.randrange(-1000, 1000) / 100
 
     def removeAnimation(self):
         if self in Global.layers['bullets']: Global.layers['bullets'].remove(self)
