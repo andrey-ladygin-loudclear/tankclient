@@ -20,8 +20,9 @@ class TankFactory:
        # tank.fireAnimation()
 
         if fraction == Global.NetworkDataCodes.PLAYER:
-            #tank.do(TESTUserTankMovingHandlers())
-            tank.do(UserTankMovingHandlers())
+            if tank.id == Global.currentPlayerId:
+                tank.do(UserTankMovingHandlers())
+
             Global.objects['players'].append(tank)
             Global.layers['game'].add(tank)
             Global.layers['game'].add(tank.getGunSprite())
