@@ -1,6 +1,5 @@
 import Global
 from movingHandlers.DefaultTankMovingHandlers import DefaultTankMovingHandlers
-from movingHandlers.TESTUserTankMovingHandlers import TESTUserTankMovingHandlers
 from movingHandlers.UserTankMovingHandlers import UserTankMovingHandlers
 from objects.tanks.ETank import ETank
 from objects.tanks.KVTank import KVTank
