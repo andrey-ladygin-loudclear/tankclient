@@ -99,6 +99,12 @@ class GameObject:
         bullet.do(BulletMovingHandlers())
         #bullet.setMovengHendler()
 
+    def damage(self, object):
+        id = object.get(Global.NetworkDataCodes.ID)
+        tank = TankFactory.get(id)
+        tank.health = object.get(Global.NetworkDataCodes.HEALTH)
+        tank.updateHealth()
+
     def destroy(self, object):
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.WALL:
             id = object.get(Global.NetworkDataCodes.ID)
@@ -111,6 +117,9 @@ class GameObject:
             id = object.get(Global.NetworkDataCodes.ID)
             position = object.get(Global.NetworkDataCodes.POSITION)
             bullet = BulletFactory.get(id)
+
+            if not bullet: return
+
             bullet.destroy()
 
             if isinstance(bullet, StandartBullet):

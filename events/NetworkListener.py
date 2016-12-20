@@ -26,6 +26,9 @@ class NetworkListener(ConnectionListener):
         if data.get('action') == Global.NetworkActions.TANK_FIRE:
             self.events.gameObject.fire(data)
 
+        if data.get('action') == Global.NetworkActions.DAMAGE:
+            self.events.gameObject.damage(data)
+
         if data.get('action') == Global.NetworkActions.DESTROY:
             self.events.gameObject.destroy(data)
 
