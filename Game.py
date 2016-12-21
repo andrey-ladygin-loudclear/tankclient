@@ -53,17 +53,9 @@ def main():
 
 
     Global.layers['panel'] = cocos.layer.Layer()
-    label = cocos.text.Label(
-        '100',
-        font_name='Times New Roman',
-        font_size=16,
-        anchor_x='left', anchor_y='top'
-    )
-    label.position = 0, Global.dimensions['y']
-    Global.layers['panel'].add(label)
-
     Global.layers['game'].add(Global.layers['panel'], z=1)
 
+    Global.Screen.init()
 
     # Create a scene and set its initial layer.
     main_scene = scene.Scene(Global.layers['game'])

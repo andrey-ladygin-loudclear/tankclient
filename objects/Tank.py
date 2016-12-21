@@ -70,18 +70,6 @@ class Tank(sprite.Sprite):
     def acceptHeavyFire(self):
         self.canHeavyFire = True
 
-    def updateHealth(self):
-        print(str(self.health))
-        Global.layers['panel'] = cocos.layer.Layer()
-        label = cocos.text.Label(
-            str(round(self.health)),
-            font_name='Times New Roman',
-            font_size=16,
-            anchor_x='left', anchor_y='top'
-        )
-        label.position = 0, Global.dimensions['y']
-        Global.layers['panel'].add(label)
-
     def bullet_fire(self, bullet):
         Global.TankNetworkListenerConnection.Send({
             'action': Global.NetworkActions.TANK_FIRE,

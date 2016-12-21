@@ -1,8 +1,9 @@
 from events.NetworkListener import NetworkListener
+from objects.ScreenLayer import ScreenLayer
 
 
 def init():
-    global keyboard, dimensions, layers, objects, collision_manager, TankNetworkListenerConnection, BulletsNetworkListenerConnection, currentPlayerId
+    global keyboard, dimensions, layers, objects, collision_manager, TankNetworkListenerConnection, BulletsNetworkListenerConnection, currentPlayerId, Screen
 
     layers = {
         'game': None,
@@ -29,6 +30,9 @@ def init():
     # BulletsNetworkListenerConnection = NetworkBulletsListener('localhost', 1333)
     keyboard = None
     collision_manager = None
+
+    Screen = ScreenLayer()
+
 
 class NetworkDataCodes:
     TANK_CLASS = 't'

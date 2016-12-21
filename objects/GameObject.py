@@ -101,9 +101,10 @@ class GameObject:
 
     def damage(self, object):
         id = object.get(Global.NetworkDataCodes.ID)
-        tank = TankFactory.get(id)
-        tank.health = object.get(Global.NetworkDataCodes.HEALTH)
-        tank.updateHealth()
+
+        if id == Global.currentPlayerId:
+            health = object.get(Global.NetworkDataCodes.HEALTH)
+            Global.Screen.setHealth(health)
 
     def destroy(self, object):
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.WALL:
