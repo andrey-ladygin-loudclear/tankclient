@@ -101,6 +101,10 @@ class GameObject:
 
     def damage(self, object):
         id = object.get(Global.NetworkDataCodes.ID)
+        dmg = object.get(Global.NetworkDataCodes.DAMAGE)
+
+        tank = TankFactory.get(id)
+        Global.Screen.damage(dmg, tank.position)
 
         if id == Global.currentPlayerId:
             health = object.get(Global.NetworkDataCodes.HEALTH)
