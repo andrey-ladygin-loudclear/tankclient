@@ -34,8 +34,6 @@ def main():
     # Initialize the window.
     Global.init()
 
-    test()
-
     director.director.init(width=Global.dimensions['x'], height=Global.dimensions['y'], do_not_scale=True, resizable=True)
     Global.collision_manager = cm.CollisionManagerBruteForce()
 
@@ -66,49 +64,6 @@ def main():
 
     # Play the scene in the window.
     director.director.run(main_scene)
-
-def test():
-    sum = 0
-
-    px = 15
-    py = 15
-
-    x1 = 10 - px
-    y1 = 10 - py
-
-    x2 = 42 - px
-    y2 = 10 - py
-
-    x3 = 42 - px
-    y3 = 42 - py
-
-    x4 = 10 - px
-    y4 = 42 - py
-
-    s1 = (x1*x1 + y1*y1 - x2*x1 - y2*y1)
-    d1 = (x1*y2 - x2*y1)
-    s2 = (x2*x2 + y2*y2 - x2*x1 - y2*y1)
-    d2 = (x1*y2 - x2*y1)
-    sum += atan(s1/d1) + atan(s2/d2)
-
-    s1 = (x2*x2 + y2*y2 - x3*x2 - y3*y2)
-    d1 = (x2*y3 - x3*y2)
-    s2 = (x3*x3 + y3*y3 - x3*x2 - y3*y2)
-    d2 = (x2*y3 - x3*y2)
-    sum += atan(s1/d1) + atan(s2/d2)
-
-    s1 = (x3*x3 + y3*y3 - x4*x3 - y4*y3)
-    d1 = (x3*y4 - x4*y3)
-    s2 = (x4*x4 + y4*y4 - x4*x3 - y4*y3)
-    d2 = (x3*y4 - x4*y3)
-    sum += atan(s1/d1) + atan(s2/d2)
-
-    s1 = (x4*x4 + y4*y4 - x1*x4 - y1*y4)
-    d1 = (x4*y1 - x1*y4)
-    s2 = (x1*x1 + y1*y1 - x1*x4 - y1*y4)
-    d2 = (x4*y1 - x1*y4)
-    sum += atan(s1/d1) + atan(s2/d2)
-    print(sum)
 
 if __name__ == '__main__':
     main()

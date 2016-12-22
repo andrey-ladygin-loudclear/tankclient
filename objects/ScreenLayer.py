@@ -12,7 +12,7 @@ class ScreenLayer:
     def init(self):
         self.label = cocos.text.Label(
             '100',
-            font_name='Times New Roman',
+            font_name='Helvetica',
             font_size=16,
             anchor_x='left',  anchor_y='top'
         )
@@ -25,7 +25,7 @@ class ScreenLayer:
     def damage(self, damage, position):
         label = cocos.text.Label(
             '-' + str(int(round(damage))),
-            font_name='Times New Roman',
+            font_name='Helvetica',
             font_size=10,
             color=(255, 0, 0, 255),
             anchor_x='center',  anchor_y='center'
