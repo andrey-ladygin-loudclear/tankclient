@@ -1,3 +1,4 @@
+from cocos import sprite
 from cocos.actions import MoveBy, Delay, Repeat
 from factories.TankFactory import TankFactory
 from factories.MovingHandlersFactory import MovingHandlersFactory
@@ -75,6 +76,12 @@ class Events():
                     Global.layers['bullets'].remove(bullet)
 
     def set_walls(self, walls):
+        for i in range(70):
+            for j in range(70):
+                background = sprite.Sprite('assets/walls/b0.jpg')
+                background.position = i*background.width, j*background.height
+                #Global.layers['background'].add(background)
+
         for wall in walls:
             brick_wall = BrickWall()
             brick_wall.id = wall.get(Global.NetworkDataCodes.ID)

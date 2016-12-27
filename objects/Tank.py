@@ -23,6 +23,10 @@ class Tank(sprite.Sprite):
     old_position = (0, 0)
     velocity = (0, 0)
 
+    maxBulletsHolder = 10
+    bulletsHolder = 10
+    timeForBulletsHolderReload = 3
+
     def __init__(self, spriteName):
         super(Tank, self).__init__(spriteName)
 
@@ -66,6 +70,10 @@ class Tank(sprite.Sprite):
 
     def acceptFire(self):
         self.canFire = True
+
+    def bulletsHolderReload(self):
+        self.canFire = True
+        self.bulletsHolder = self.maxBulletsHolder
 
     def acceptHeavyFire(self):
         self.canHeavyFire = True

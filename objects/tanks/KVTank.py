@@ -12,8 +12,8 @@ class KVTank(Tank):
     spriteName = 'assets/tank/parts/KV-2_1.png'
     spriteGunName = 'assets/tank/parts/KV-2_2.png'
 
-    bulletFreezTime = 0.08
-    heavyBulletFreezTime = 1
+    bulletFreezTime = 0.1
+    heavyBulletFreezTime = 3
 
     speed_acceleration = 4
     max_speed = 70
@@ -52,12 +52,18 @@ class KVTank(Tank):
     def fire(self):
         if self.canFire:
             self.canFire = False
+            self.bulletsHolder -= 1
 
             bullet = StandartBullet()
             bullet.rotation = self.Gun.getRotation() + self.Gun.getStandartGunAngleDeflection()
             bullet.position = self.Gun.standartFirePosition()
 
             self.bullet_fire(bullet)
+
+            if not self.bulletsHolder:
+                t = Timer(self.timeForBulletsHolderReload, self.bulletsHolderReload)
+                t.start()
+                return
 
             t = Timer(self.bulletFreezTime, self.acceptFire)
             t.start()

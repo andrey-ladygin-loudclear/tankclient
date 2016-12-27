@@ -9,6 +9,7 @@ def init():
         'game': None,
         'panel': None,
         'walls': [],
+        'background': [],
         'bullets': [],
         'enemies': [],
         'test': [],

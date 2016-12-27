@@ -34,16 +34,22 @@ def main():
     # Initialize the window.
     Global.init()
 
-    director.director.init(width=Global.dimensions['x'], height=Global.dimensions['y'], do_not_scale=True, resizable=True)
+    director.director.init(width=Global.dimensions['x'], height=Global.dimensions['y'], do_not_scale=True, resizable=True, fullscreen=True)
     Global.collision_manager = cm.CollisionManagerBruteForce()
+
+
+    #// SCROLLER  http://jpwright.net/writing/python-cocos2d-game-2/
+
 
     # Create a layer and add a sprite to it.
     Global.layers['game'] = Game()
     Global.layers['bullets'] = BatchNode()
     Global.layers['walls'] = BatchNode()
+    Global.layers['background'] = BatchNode()
     Global.layers['enemies'] = BatchNode()
     Global.layers['test'] = BatchNode()
 
+    Global.layers['game'].add(Global.layers['background'], z=0)
     Global.layers['game'].add(Global.layers['bullets'])
     Global.layers['game'].add(Global.layers['walls'])
     Global.layers['game'].add(Global.layers['enemies'])
