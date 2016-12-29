@@ -31,6 +31,7 @@ def init():
     # BulletsNetworkListenerConnection = NetworkBulletsListener('localhost', 1333)
     keyboard = None
     collision_manager = None
+    currentPlayerId = 0
 
     Screen = ScreenLayer()
 

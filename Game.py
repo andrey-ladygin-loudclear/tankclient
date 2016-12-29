@@ -34,7 +34,8 @@ def main():
     # Initialize the window.
     Global.init()
 
-    director.director.init(width=Global.dimensions['x'], height=Global.dimensions['y'], do_not_scale=True, resizable=True, fullscreen=True)
+    director.director.init(width=Global.dimensions['x'], height=Global.dimensions['y'], do_not_scale=True, resizable=True)
+    #director.director.init(do_not_scale=True, resizable=True, fullscreen=True)
     Global.collision_manager = cm.CollisionManagerBruteForce()
 
 
