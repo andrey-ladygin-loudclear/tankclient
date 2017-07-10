@@ -1,7 +1,6 @@
 from math import atan
 
 import PodSixNet, time
-from PodSixNet.Connection import connection
 from time import sleep
 
 # tell the client which server to connect to
@@ -16,6 +15,8 @@ from cocos.batch import BatchNode
 from pyglet.window import key
 
 import Global
+from Global import Config, Layers, CurrentScreen, TankNetworkListenerConnection
+
 
 class Game(cocos.layer.ColorLayer):
     is_event_handler = True
@@ -25,49 +26,44 @@ class Game(cocos.layer.ColorLayer):
         self.schedule(self.update)
 
     def update(self, dt):
-        connection.Pump()
+        PodSixNet.Connection.connection.Pump()
 
-        if Global.TankNetworkListenerConnection:
-            Global.TankNetworkListenerConnection.Pump()
+        if TankNetworkListenerConnection:
+            TankNetworkListenerConnection.Pump()
 
 def main():
     # Initialize the window.
-    Global.init()
 
-    director.director.init(width=Global.dimensions['x'], height=Global.dimensions['y'], do_not_scale=True, resizable=True)
+    director.director.init(width=Config.dimensions['x'], height=Config.dimensions['y'], do_not_scale=True, resizable=True)
     #director.director.init(do_not_scale=True, resizable=True, fullscreen=True)
-    Global.collision_manager = cm.CollisionManagerBruteForce()
-
+    Global.CollisionManager = cm.CollisionManagerBruteForce()
 
     #// SCROLLER  http://jpwright.net/writing/python-cocos2d-game-2/
 
 
     # Create a layer and add a sprite to it.
-    Global.layers['game'] = Game()
-    Global.layers['bullets'] = BatchNode()
-    Global.layers['walls'] = BatchNode()
-    Global.layers['background'] = BatchNode()
-    Global.layers['enemies'] = BatchNode()
-    Global.layers['test'] = BatchNode()
+    Layers.game = Game()
+    Layers.bullets = BatchNode()
+    Layers.walls = BatchNode()
+    Layers.backgrounds = BatchNode()
+    Layers.tanks = BatchNode()
 
-    Global.layers['game'].add(Global.layers['background'], z=0)
-    Global.layers['game'].add(Global.layers['bullets'])
-    Global.layers['game'].add(Global.layers['walls'])
-    Global.layers['game'].add(Global.layers['enemies'])
-    Global.layers['game'].add(Global.layers['test'])
+    Layers.game.add(Layers.backgrounds, z=0)
+    Layers.game.add(Layers.bullets)
+    Layers.game.add(Layers.walls)
+    Layers.game.add(Layers.tanks)
 
+    Layers.globalPanel = cocos.layer.Layer()
+    Layers.game.add(Layers.globalPanel, z=1)
 
-    Global.layers['panel'] = cocos.layer.Layer()
-    Global.layers['game'].add(Global.layers['panel'], z=1)
-
-    Global.Screen.init()
+    CurrentScreen.init()
 
     # Create a scene and set its initial layer.
-    main_scene = scene.Scene(Global.layers['game'])
+    main_scene = scene.Scene(Layers.game)
 
     # Attach a KeyStateHandler to the keyboard object.
-    Global.keyboard = key.KeyStateHandler()
-    director.director.window.push_handlers(Global.keyboard)
+    Global.CurrentKeyboard = key.KeyStateHandler()
+    director.director.window.push_handlers(Global.CurrentKeyboard)
 
     # Play the scene in the window.
     director.director.run(main_scene)

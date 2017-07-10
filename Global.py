@@ -2,38 +2,28 @@ from events.NetworkListener import NetworkListener
 from objects.ScreenLayer import ScreenLayer
 
 
-def init():
-    global keyboard, dimensions, layers, objects, collision_manager, TankNetworkListenerConnection, BulletsNetworkListenerConnection, currentPlayerId, Screen
+CurrentPlayer = None
+CurrentScreen = ScreenLayer()
+CurrentKeyboard = None
+TankNetworkListenerConnection = NetworkListener('localhost', 1332)
+CollisionManager = None
+CurrentPlayerId = 0
 
-    layers = {
-        'game': None,
-        'panel': None,
-        'walls': [],
-        'background': [],
-        'bullets': [],
-        'enemies': [],
-        'test': [],
-    }
 
-    objects = {
-        'walls': [],
-        'bullets': [],
-        'enemies': [],
-        'players': [],
-    }
+class Layers:
+    game = None
+    globalPanel = None
+    walls = []
+    backgrounds = []
+    bullets = []
+    tanks = []
 
+
+class Config:
     dimensions = {
         'x': 3000,
         'y': 1000,
     }
-
-    TankNetworkListenerConnection = NetworkListener('localhost', 1332)
-    # BulletsNetworkListenerConnection = NetworkBulletsListener('localhost', 1333)
-    keyboard = None
-    collision_manager = None
-    currentPlayerId = 0
-
-    Screen = ScreenLayer()
 
 
 class NetworkDataCodes:

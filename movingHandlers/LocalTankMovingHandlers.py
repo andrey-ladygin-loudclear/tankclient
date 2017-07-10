@@ -1,24 +1,23 @@
 import math
 
 import operator
-from cocos import actions
 import cocos.collision_model as cm
 
 import Global
+from movingHandlers.DefaultTankMovingHandlers import DefaultTankMovingHandlers
+from pyglet.window import key
 
 
-class DefaultTankMovingHandlers(actions.Move):
+class LocalTankMovingHandlers(DefaultTankMovingHandlers):
 
-    speed = 0
-
-    RIGHT = None
-    LEFT = None
-    UP = None
-    DOWN = None
-    GUN_LEFT = None
-    GUN_RIGHT = None
-    FIRE_HEAVY_GUN = None
-    FIRE_LIGHT_GUN = None
+    RIGHT = key.RIGHT
+    LEFT = key.LEFT
+    UP = key.UP
+    DOWN = key.DOWN
+    GUN_LEFT = key.Q
+    GUN_RIGHT = key.E
+    FIRE_HEAVY_GUN = key.SPACE
+    FIRE_LIGHT_GUN = key.W
 
     # step() is called every frame.
     # dt is the number of seconds elapsed since the last call.
@@ -83,11 +82,11 @@ class DefaultTankMovingHandlers(actions.Move):
             return True
 
         return False
-            # for wall in Global.objects['walls']:
-            #     for collision_wall in collisions:
-            #         if wall.get('id') == collision_wall.id:
-            #             player.position = data.get('pos')
-            #             break
+        # for wall in Global.objects['walls']:
+        #     for collision_wall in collisions:
+        #         if wall.get('id') == collision_wall.id:
+        #             player.position = data.get('pos')
+        #             break
 
     def getVelocityByNewPosition(self, current_position, new_position):
         curr_x, curr_y = current_position

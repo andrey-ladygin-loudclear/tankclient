@@ -1,11 +1,23 @@
 import Global
 from movingHandlers.DefaultTankMovingHandlers import DefaultTankMovingHandlers
+from movingHandlers.LocalTankMovingHandlers import LocalTankMovingHandlers
 from movingHandlers.UserTankMovingHandlers import UserTankMovingHandlers
 from objects.tanks.ETank import ETank
 from objects.tanks.KVTank import KVTank
 
 
 class TankFactory:
+
+    @staticmethod
+    def create():
+        tank = ETank()
+        tank.id = 1
+        tank.setStartPosition((100, 100))
+        #tank.do(UserTankMovingHandlers())
+        tank.do(LocalTankMovingHandlers())
+        Global.Layers.tanks.add(tank)
+        Global.Layers.tanks.add(tank.getGunSprite())
+        pass
 
     @staticmethod
     def getOrCreate(id, fraction, position, tank_class):

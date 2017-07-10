@@ -4,6 +4,7 @@ import cocos
 from cocos.actions import MoveBy, FadeOut
 
 import Global
+from factories.TankFactory import TankFactory
 
 
 class ScreenLayer:
@@ -11,13 +12,15 @@ class ScreenLayer:
 
     def init(self):
         self.label = cocos.text.Label(
-            '100',
+            '1000',
             font_name='Helvetica',
             font_size=16,
             anchor_x='left',  anchor_y='top'
         )
-        self.label.position = 0, Global.dimensions['y']
-        Global.layers['panel'].add(self.label)
+        self.label.position = 0, Global.Config.dimensions['y']
+        Global.Layers.globalPanel.add(self.label)
+
+        TankFactory.create()
 
     def setHealth(self, health):
         self.label.element.text = str(int(round(health)))
@@ -31,9 +34,9 @@ class ScreenLayer:
             anchor_x='center',  anchor_y='center'
         )
         label.position = position
-        Global.layers['panel'].add(label)
+        Global.Settings.layers.globalPanel.add(label)
         label.do(MoveBy((0, 100), 2) | FadeOut(2))
 
-        t = Timer(2000, lambda: Global.layers['panel'].remove(label))
+        t = Timer(2000, lambda: Global.Layers.layers.globalPanel.remove(label))
         t.start()
 
