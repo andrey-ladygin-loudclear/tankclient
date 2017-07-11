@@ -33,6 +33,6 @@ class standartBulletFireAnimation:
 
     def appendAnimationToLayer(self, position, rotation):
         anim = self.getSprite(position, rotation)
-        Global.layers['game'].add(anim)
-        t = Timer(self.animation.get_duration(), lambda: Global.layers['game'].remove(anim))
+        Global.Layers.game.add(anim)
+        t = Timer(self.animation.get_duration(), lambda: Global.Layers.game.remove(anim))
         t.start()

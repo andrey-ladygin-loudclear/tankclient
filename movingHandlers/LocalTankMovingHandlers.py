@@ -31,7 +31,6 @@ class LocalTankMovingHandlers(DefaultTankMovingHandlers):
         moving_directions = Global.CurrentKeyboard[self.UP] - Global.CurrentKeyboard[self.DOWN]
         gun_turns_direction = Global.CurrentKeyboard[self.GUN_RIGHT] - Global.CurrentKeyboard[self.GUN_LEFT]
 
-
         if Global.CurrentKeyboard[self.FIRE_LIGHT_GUN]:
             self.target.fire()
 
@@ -69,73 +68,3 @@ class LocalTankMovingHandlers(DefaultTankMovingHandlers):
 
         # Set the object's rotation
         self.setGunRotation(gun_turns_direction)
-
-    def checkCollisionsWithObjects(self):
-        self.target.cshape = cm.AARectShape(
-            self.target.position,
-            self.target.width // 2,
-            self.target.height // 2
-        )
-        collisions = Global.CollisionManager.objs_colliding(self.target)
-
-        if collisions:
-            return True
-
-        return False
-        # for wall in Global.objects['walls']:
-        #     for collision_wall in collisions:
-        #         if wall.get('id') == collision_wall.id:
-        #             player.position = data.get('pos')
-        #             break
-
-    def getVelocityByNewPosition(self, current_position, new_position):
-        curr_x, curr_y = current_position
-        new_x, new_y = new_position
-        diff_x = new_x - curr_x
-        diff_y = new_y - curr_y
-
-        #if diff_x < 0.3: diff_x = 0
-        #if diff_y < 0.3: diff_y = 0
-
-        return (diff_x, diff_y)
-
-
-    def setTankRotation(self, turns_direction, moving_directions):
-        self.target.rotation = self.getTankRotation(turns_direction, moving_directions)
-
-    def setNewVelocity(self, velocity):
-        self.target.velocity = velocity
-
-    def getTankRotation(self, turns_direction, moving_directions):
-        tank_rotate = self.target.rotation_speed * turns_direction
-
-        if moving_directions:
-            tank_rotate *= moving_directions
-
-        return self.target.rotation + tank_rotate
-
-    def getVelocity(self):
-        tank_rotation = self.target.rotation
-        cos_x = math.cos(math.radians(tank_rotation + 180))
-        sin_x = math.sin(math.radians(tank_rotation + 180))
-        return (self.speed * sin_x, self.speed * cos_x)
-
-    def setGunPosition(self):
-        self.target.Gun.position = self.target.position
-
-    def setGunRotation(self, gun_turns_direction):
-        self.target.Gun.gun_rotation += self.target.gun_rotation_speed * (gun_turns_direction)
-        self.target.Gun.rotation = self.target.rotation + self.target.Gun.gun_rotation
-
-    def addSpeed(self, moving_directions):
-        if moving_directions:
-            speed = self.speed + self.target.speed_acceleration * moving_directions
-
-            if abs(speed) < self.target.max_speed:
-                self.speed = speed
-
-        else:
-            if self.speed > 0:
-                self.speed -= self.target.speed_acceleration
-            elif self.speed < 0:
-                self.speed += self.target.speed_acceleration

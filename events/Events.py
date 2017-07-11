@@ -76,17 +76,19 @@ class Events():
                     Global.layers['bullets'].remove(bullet)
 
     def set_walls(self, walls):
-        for i in range(70):
-            for j in range(70):
-                background = sprite.Sprite('assets/walls/b0.jpg')
-                background.position = i*background.width, j*background.height
-                #Global.layers['background'].add(background)
-
         for wall in walls:
-            brick_wall = BrickWall()
-            brick_wall.id = wall.get(Global.NetworkDataCodes.ID)
-            brick_wall.update_position(wall.get(Global.NetworkDataCodes.POSITION))
+            src = wall.get(Global.NetworkDataCodes.SRC).replace('assets/', 'assets/map/')
+            brick_wall = sprite.Sprite(src)
 
-            Global.objects['walls'].append(brick_wall)
-            Global.layers['walls'].add(brick_wall)
+            type = wall.get(Global.NetworkDataCodes.TYPE)
+
+            brick_wall.id = wall.get(Global.NetworkDataCodes.ID)
+            brick_wall.position = wall.get(Global.NetworkDataCodes.POSITION)
+            brick_wall.type = type
+            brick_wall.src = src
+
+            Global.GameLayers.addWall(brick_wall)
             #Global.collision_manager.add(brick_wall)
+
+            if brick_wall.type != 'background':
+                Global.GameObjects.append(brick_wall)

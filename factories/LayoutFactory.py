@@ -4,13 +4,7 @@ class LayoutFactory:
 
     @staticmethod
     def addTank(tank, fraction):
-        if fraction == 'player':
-            Global.layers['game'].add(tank)
-            Global.layers['game'].add(tank.getGunSprite())
-
-        if fraction == 'enemy':
-            Global.layers['enemies'].add(tank)
-            Global.layers['enemies'].add(tank.getGunSprite())
+        Global.GameLayers.addTank(tank)
 
     @staticmethod
     def addBullet(bullet):

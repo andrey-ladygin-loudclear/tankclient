@@ -49,7 +49,7 @@ def main():
     Layers.tanks = BatchNode()
 
     Layers.game.add(Layers.backgrounds, z=0)
-    Layers.game.add(Layers.bullets)
+    Layers.game.add(Layers.bullets, z=1)
     Layers.game.add(Layers.walls)
     Layers.game.add(Layers.tanks)
 

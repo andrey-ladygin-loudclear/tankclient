@@ -23,15 +23,21 @@ class DefaultTankMovingHandlers(actions.Move):
     # step() is called every frame.
     # dt is the number of seconds elapsed since the last call.
     def step(self, dt):
-
-        # UserTankMovingHandlers
-        # super(DefaultTankMovingHandlers, self).step(dt) # Run step function on the parent class.
         super(DefaultTankMovingHandlers, self).step(dt) # Run step function on the parent class.
 
         turns_direction = Global.CurrentKeyboard[self.RIGHT] - Global.CurrentKeyboard[self.LEFT]
         moving_directions = Global.CurrentKeyboard[self.UP] - Global.CurrentKeyboard[self.DOWN]
         gun_turns_direction = Global.CurrentKeyboard[self.GUN_RIGHT] - Global.CurrentKeyboard[self.GUN_LEFT]
 
+        # if turns_direction or moving_directions or gun_turns_direction:
+        #     Global.TankNetworkListenerConnection.Send({
+        #         'action': Global.NetworkActions.TANK_MOVE,
+        #         'pos': self.target.position,
+        #         'turn': turns_direction,
+        #         'mov': moving_directions,
+        #         'gun_turn': gun_turns_direction,
+        #         'id': self.target.id
+        #     })
 
         if Global.CurrentKeyboard[self.FIRE_LIGHT_GUN]:
             self.target.fire()
@@ -53,12 +59,20 @@ class DefaultTankMovingHandlers(actions.Move):
         else:
             self.target.old_position = self.target.position
 
-            if(self.target.position != new_position):
-                Global.TankNetworkListenerConnection.Send({
-                    'action': Global.NetworkActions.TANK_MOVE,
-                    'pos': self.target.position,
-                    'id': self.target.id
-                })
+            # if(self.target.position != new_position):
+                # Global.TankNetworkListenerConnection.Send({
+                #     'action': Global.NetworkActions.TANK_MOVE,
+                #     'pos': self.target.position,
+                #     'id': self.target.id
+                # })
+                # Global.TankNetworkListenerConnection.Send({
+                #     'action': Global.NetworkActions.TANK_MOVE,
+                #     'pos': self.target.position,
+                #     'turn': turns_direction,
+                #     'mov': moving_directions,
+                #     'gun_turn': gun_turns_direction,
+                #     'id': self.target.id
+                # })
 
             new_velocity = self.getVelocityByNewPosition(self.target.position, new_position)
             self.setNewVelocity(new_velocity)
@@ -83,20 +97,12 @@ class DefaultTankMovingHandlers(actions.Move):
             return True
 
         return False
-            # for wall in Global.objects['walls']:
-            #     for collision_wall in collisions:
-            #         if wall.get('id') == collision_wall.id:
-            #             player.position = data.get('pos')
-            #             break
 
     def getVelocityByNewPosition(self, current_position, new_position):
         curr_x, curr_y = current_position
         new_x, new_y = new_position
         diff_x = new_x - curr_x
         diff_y = new_y - curr_y
-
-        #if diff_x < 0.3: diff_x = 0
-        #if diff_y < 0.3: diff_y = 0
 
         return (diff_x, diff_y)
 

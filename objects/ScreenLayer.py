@@ -20,7 +20,7 @@ class ScreenLayer:
         self.label.position = 0, Global.Config.dimensions['y']
         Global.Layers.globalPanel.add(self.label)
 
-        TankFactory.create()
+        #TankFactory.create()
 
     def setHealth(self, health):
         self.label.element.text = str(int(round(health)))
@@ -34,9 +34,9 @@ class ScreenLayer:
             anchor_x='center',  anchor_y='center'
         )
         label.position = position
-        Global.Settings.layers.globalPanel.add(label)
+        Global.GameLayers.globalPanel.add(label)
         label.do(MoveBy((0, 100), 2) | FadeOut(2))
 
-        t = Timer(2000, lambda: Global.Layers.layers.globalPanel.remove(label))
+        t = Timer(2000, lambda: Global.GameLayers.globalPanel.remove(label))
         t.start()
 

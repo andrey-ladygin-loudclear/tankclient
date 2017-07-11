@@ -1,11 +1,4 @@
-from threading import Timer
-
-import cocos.collision_model as cm
-
-import Global
 from objects.Tank import Tank
-from objects.bullets.heavyBullet import HeavyBullet
-from objects.bullets.standartBullet import StandartBullet
 
 
 class KVTank(Tank):
@@ -27,43 +20,3 @@ class KVTank(Tank):
 
     def __init__(self):
         super(KVTank, self).__init__(self.spriteName)
-        self.setGunSprite(self.spriteGunName)
-        self.setDefaultState()
-        self.cshape = cm.AARectShape(
-            self.position,
-            self.width // 2,
-            self.height // 2
-        )
-
-    def heavy_fire(self):
-        if self.canHeavyFire:
-            self.canHeavyFire = False
-
-            bullet = HeavyBullet()
-            bullet.rotation = self.Gun.getRotation() + self.Gun.getHeavyGunAngleDeflection()
-            bullet.position = self.Gun.heavyFirePosition()
-
-            self.bullet_fire(bullet)
-
-            t = Timer(self.heavyBulletFreezTime, self.acceptHeavyFire)
-            t.start()
-
-
-    def fire(self):
-        if self.canFire:
-            self.canFire = False
-            self.bulletsHolder -= 1
-
-            bullet = StandartBullet()
-            bullet.rotation = self.Gun.getRotation() + self.Gun.getStandartGunAngleDeflection()
-            bullet.position = self.Gun.standartFirePosition()
-
-            self.bullet_fire(bullet)
-
-            if not self.bulletsHolder:
-                t = Timer(self.timeForBulletsHolderReload, self.bulletsHolderReload)
-                t.start()
-                return
-
-            t = Timer(self.bulletFreezTime, self.acceptFire)
-            t.start()

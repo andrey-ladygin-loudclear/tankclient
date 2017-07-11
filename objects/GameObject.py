@@ -70,45 +70,27 @@ class GameObject:
         last_update_time = object.get(Global.NetworkDataCodes.LAST_UPDATE_TIME)
         last_update_time = float(last_update_time)
 
+        tank = TankFactory.get(parent_id)
+
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.STANDART_BULLET:
-            bullet = StandartBullet()
+            #tank.fire(position, rotation, last_update_time)
+            bullet = BulletFactory.create(StandartBullet(), id, tank, position, rotation, last_update_time)
 
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.HEAVY_BULLET:
-            bullet = HeavyBullet()
+            #tank.heavy_fire(position, rotation, last_update_time)
+            bullet = BulletFactory.create(HeavyBullet(), id, tank, position, rotation, last_update_time)
 
-        bullet.id = id
-        bullet.parent_id = parent_id
-        bullet.position = position
-        bullet.start_position = position
-        bullet.rotation = rotation
-        bullet.last_update_time = last_update_time
-
-        firedTank = TankFactory.get(parent_id)
-
-        if isinstance(bullet, StandartBullet):
-            animation = standartBulletFireAnimation()
-            animatiom_position = firedTank.Gun.standartFireAnimationPosition()
-        else:
-            animation = heavyBulletFireAnimation()
-            animatiom_position = firedTank.Gun.heavyFireAnimationPosition()
-
-        animation.appendAnimationToLayer(animatiom_position, rotation)
-
-        BulletFactory.addToObjects(bullet)
-
-        bullet.do(BulletMovingHandlers())
-        #bullet.setMovengHendler()
 
     def damage(self, object):
         id = object.get(Global.NetworkDataCodes.ID)
         dmg = object.get(Global.NetworkDataCodes.DAMAGE)
 
         tank = TankFactory.get(id)
-        Global.Screen.damage(dmg, tank.position)
+        Global.CurrentScreen.damage(dmg, tank.position)
 
-        if id == Global.currentPlayerId:
+        if id == Global.CurrentPlayerId:
             health = object.get(Global.NetworkDataCodes.HEALTH)
-            Global.Screen.setHealth(health)
+            Global.CurrentScreen.setHealth(health)
 
     def destroy(self, object):
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.WALL:
@@ -119,9 +101,12 @@ class GameObject:
 
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.STANDART_BULLET or \
                         object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.HEAVY_BULLET:
+
             id = object.get(Global.NetworkDataCodes.ID)
             position = object.get(Global.NetworkDataCodes.POSITION)
             bullet = BulletFactory.get(id)
+
+            print 'destroy bullet', id
 
             if not bullet: return
 

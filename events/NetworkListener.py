@@ -13,9 +13,15 @@ class NetworkListener(ConnectionListener):
         self.Connect((host, port))
 
     def Network(self, data):
+
+        print time(), data
+
         if data.get('action') == Global.NetworkActions.INIT:
-            self.events.set_walls(data.get('walls'))
-            Global.currentPlayerId = data.get('id')
+            if data.get('walls'):
+                self.events.set_walls(data.get('walls'))
+
+            if data.get('id'):
+                Global.CurrentPlayerId = data.get('id')
 
         if data.get('action') == Global.NetworkActions.UPDATE:
             self.events.gameObject.update(data)

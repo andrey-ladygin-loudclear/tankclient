@@ -17,7 +17,6 @@ class TankFactory:
         tank.do(LocalTankMovingHandlers())
         Global.Layers.tanks.add(tank)
         Global.Layers.tanks.add(tank.getGunSprite())
-        pass
 
     @staticmethod
     def getOrCreate(id, fraction, position, tank_class):
@@ -31,29 +30,19 @@ class TankFactory:
        # tank.fireAnimation()
 
         if fraction == Global.NetworkDataCodes.PLAYER:
-            if tank.id == Global.currentPlayerId:
+            if tank.id == Global.CurrentPlayerId:
                 tank.do(UserTankMovingHandlers())
 
-            Global.objects['players'].append(tank)
-            Global.layers['game'].add(tank)
-            Global.layers['game'].add(tank.getGunSprite())
-
-        if fraction == 'enemy':
-            Global.objects['enemies'].append(tank)
-            Global.layers['enemies'].add(tank)
-            Global.layers['enemies'].add(tank.getGunSprite())
+        Global.GameLayers.addTank(tank)
+        Global.GameObjects.append(tank)
 
         return tank
 
     @staticmethod
     def get(id):
-        for player in Global.objects['players']:
-            if player.id == id:
-                return player
-
-        for enemy in Global.objects['enemies']:
-            if enemy.id == id:
-                return enemy
+        for tank in Global.GameObjects:
+            if tank.id == id:
+                return tank
 
         return None
 

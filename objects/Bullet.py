@@ -66,8 +66,8 @@ class Bullet(sprite.Sprite):
         #frames = [frame.image for frame in animation.frames]
 
     def destroy(self):
-        if self in Global.layers['bullets']: Global.layers['bullets'].remove(self)
-        if self in Global.objects['bullets']: Global.objects['bullets'].remove(self)
+        if self in Global.GameLayers.bullets: Global.GameLayers.removeBullet(self)
+        if self in Global.GameObjects: Global.GameObjects.remove(self)
 
 
 class removeAfterComplete(Action):

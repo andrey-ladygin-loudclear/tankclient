@@ -1,3 +1,4 @@
+from repositories.Layers import Layers
 from events.NetworkListener import NetworkListener
 from objects.ScreenLayer import ScreenLayer
 
@@ -8,15 +9,8 @@ CurrentKeyboard = None
 TankNetworkListenerConnection = NetworkListener('localhost', 1332)
 CollisionManager = None
 CurrentPlayerId = 0
-
-
-class Layers:
-    game = None
-    globalPanel = None
-    walls = []
-    backgrounds = []
-    bullets = []
-    tanks = []
+GameLayers = Layers()
+GameObjects = []
 
 
 class Config:
@@ -34,6 +28,7 @@ class NetworkDataCodes:
     LAST_UPDATE_TIME = 'lt'
     ROTATION = 'r'
     TYPE = 'y'
+    SRC = 's'
     ID = 'i'
     HEALTH = 'h'
     DAMAGE = 'd'
