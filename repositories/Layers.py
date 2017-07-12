@@ -17,7 +17,7 @@ class Layers:
         self.walls.add(wall)
 
     def removeWall(self, wall):
-        self.walls.add(wall)
+        self.walls.remove(wall)
 
     def removeAnimation(self, anim):
         self.globalPanel.add(anim)

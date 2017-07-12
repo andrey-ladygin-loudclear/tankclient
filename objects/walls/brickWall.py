@@ -10,8 +10,8 @@ class BrickWall(sprite.Sprite):
     health = 20
     id = 0
 
-    def __init__(self):
-        super(BrickWall, self).__init__(self.spriteName)
+    def __init__(self, sprite):
+        super(BrickWall, self).__init__(sprite)
 
     def update_position(self, position):
         self.position = position
@@ -33,5 +33,5 @@ class BrickWall(sprite.Sprite):
         self.health -= bullet.damage / range
 
     def destroy(self):
-        if self in Global.objects['walls']: Global.objects['walls'].remove(self)
-        if self in Global.layers['walls']: Global.layers['walls'].remove(self)
+        if self in Global.GameObjects: Global.GameObjects.remove(self)
+        if self in Global.GameLayers.walls: Global.GameLayers.removeWall(self)

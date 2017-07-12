@@ -26,6 +26,10 @@ class NetworkListener(ConnectionListener):
         if data.get('action') == Global.NetworkActions.UPDATE:
             self.events.gameObject.update(data)
 
+        if data.get('action') == Global.NetworkActions.UPDATE_BATCH:
+            for player_data in data.get('objects'):
+                self.events.gameObject.update(player_data)
+
         if data.get('action') == Global.NetworkActions.TEST:
             self.events.gameObject.test(data)
 

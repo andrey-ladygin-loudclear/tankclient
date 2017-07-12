@@ -12,7 +12,7 @@ class ScreenLayer:
 
     def init(self):
         self.label = cocos.text.Label(
-            '1000',
+            '100',
             font_name='Helvetica',
             font_size=16,
             anchor_x='left',  anchor_y='top'

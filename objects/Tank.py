@@ -6,7 +6,7 @@ from time import time
 
 import cocos
 from cocos import sprite
-from cocos.actions import MoveBy
+from cocos.actions import MoveBy, Accelerate, Rotate, MoveTo, RotateTo
 from cocos.rect import Rect
 from threading import Timer
 import cocos.collision_model as cm
@@ -62,18 +62,22 @@ class Tank(sprite.Sprite):
 
     def update(self, position, rotation, gun_rotation):
         self.rotation = rotation
-        self.Gun.rotation = gun_rotation
-
         move_to = self.getMoveBy(position)
-        self.do(MoveBy(move_to, .1))
-        self.Gun.do(MoveBy(move_to, .1))
+
+        #self.Gun.rotation = gun_rotation
+
+        action = RotateTo(gun_rotation, 0.2)
+        self.Gun.do(action)
+
+        self.do(MoveBy(move_to, 0.1))
+        self.Gun.do(MoveBy(move_to, 0.1))
 
     def setDefaultState(self):
         self.Gun.image_anchor = (self.Gun.image.width / 2, self.Gun.image.height / 2 + 20)
         self.scale = 0.5
         self.Gun.scale = 0.5
         self.rotation = 180
-        self.Gun.gun_rotation = 0
+        self.Gun.gun_rotation = self.rotation
         self.Gun.position = self.position
         self.Gun.rotation = self.rotation + self.Gun.gun_rotation
 

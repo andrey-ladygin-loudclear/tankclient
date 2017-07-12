@@ -7,7 +7,7 @@ class WallFactory:
 
     @staticmethod
     def get(id):
-        for wall in Global.objects['walls']:
+        for wall in Global.GameObjects:
             if wall.id == id:
                 return wall
 

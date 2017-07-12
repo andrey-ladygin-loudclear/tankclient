@@ -22,8 +22,12 @@ class GameObject:
     testObjects = []
 
     def update(self, object):
-        if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.KVTank:
-            self.updateTank(object, 'KVTank')
+        tank_class = 'KVTank'
+
+        if object.get(Global.NetworkDataCodes.TYPE) != Global.NetworkDataCodes.KVTank:
+            tank_class = 'ETank'
+
+        self.updateTank(object, tank_class)
 
     def updateTank(self, object, tank_class):
         id = object.get(Global.NetworkDataCodes.ID)

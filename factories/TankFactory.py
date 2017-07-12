@@ -20,6 +20,7 @@ class TankFactory:
 
     @staticmethod
     def getOrCreate(id, fraction, position, tank_class):
+        # print "Get Tank id: ", id, position
         tank = TankFactory.get(id)
 
         if tank: return tank

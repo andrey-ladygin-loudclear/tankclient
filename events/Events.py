@@ -78,7 +78,8 @@ class Events():
     def set_walls(self, walls):
         for wall in walls:
             src = wall.get(Global.NetworkDataCodes.SRC).replace('assets/', 'assets/map/')
-            brick_wall = sprite.Sprite(src)
+            #brick_wall = sprite.Sprite(src)
+            brick_wall = BrickWall(src)
 
             type = wall.get(Global.NetworkDataCodes.TYPE)
 

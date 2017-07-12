@@ -1,3 +1,5 @@
+from time import time, sleep
+
 import Global
 from movingHandlers.DefaultTankMovingHandlers import DefaultTankMovingHandlers
 from pyglet.window import key
@@ -31,6 +33,7 @@ class UserTankMovingHandlers(actions.Move):
                 'turn': turns_direction,
                 'mov': moving_directions,
                 'gun_turn': gun_turns_direction,
+                'time': time(),
                 'id': self.target.id
             })
 
