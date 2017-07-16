@@ -69,6 +69,8 @@ class Tank(sprite.Sprite):
         action = RotateTo(gun_rotation, 0.2)
         self.Gun.do(action)
 
+        print move_to
+
         self.do(MoveBy(move_to, 0.1))
         self.Gun.do(MoveBy(move_to, 0.1))
 

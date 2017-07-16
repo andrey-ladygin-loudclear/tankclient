@@ -16,7 +16,7 @@ GameObjects = []
 class Config:
     dimensions = {
         'x': 3000,
-        'y': 1000,
+        'y': 980,
     }
 
 

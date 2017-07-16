@@ -110,7 +110,7 @@ class GameObject:
             position = object.get(Global.NetworkDataCodes.POSITION)
             bullet = BulletFactory.get(id)
 
-            print 'destroy bullet', id
+            #print 'destroy bullet', id
 
             if not bullet: return
 
