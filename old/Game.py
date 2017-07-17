@@ -32,9 +32,16 @@ class Game(cocos.layer.ColorLayer):
             TankNetworkListenerConnection.Pump()
 
 def main():
-    director.director.init(width=3000, height=980, do_not_scale=True, resizable=True)
+    # Initialize the window.
+
+    director.director.init(width=Config.dimensions['x'], height=Config.dimensions['y'], do_not_scale=True, resizable=True)
+    #director.director.init(do_not_scale=True, resizable=True, fullscreen=True)
     Global.CollisionManager = cm.CollisionManagerBruteForce()
 
+    #// SCROLLER  http://jpwright.net/writing/python-cocos2d-game-2/
+
+
+    # Create a layer and add a sprite to it.
     Layers.game = Game()
     Layers.bullets = BatchNode()
     Layers.walls = BatchNode()
