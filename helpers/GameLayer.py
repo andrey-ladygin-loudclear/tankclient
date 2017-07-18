@@ -36,8 +36,8 @@ class GameLayer(cocos.layer.ScrollableLayer):
         if y_direction:
             y += y_direction * 20
 
-        if x_direction or y_direction:
-            self.set_view(0, 0, self.currentWidth, self.currentHeight, x, y)
+        # if x_direction or y_direction:
+        #     self.set_view(0, 0, self.currentWidth, self.currentHeight, x, y)
 
         if self.CurrentKeyboard[key.SPACE]:
             self.set_view(0, 0, self.currentWidth, self.currentHeight, 0, 0)

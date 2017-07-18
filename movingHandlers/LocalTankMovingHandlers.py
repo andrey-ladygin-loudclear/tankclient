@@ -27,11 +27,21 @@ class LocalTankMovingHandlers(DefaultTankMovingHandlers):
         # super(DefaultTankMovingHandlers, self).step(dt) # Run step function on the parent class.
         super(DefaultTankMovingHandlers, self).step(dt) # Run step function on the parent class.
 
-        return
-
         turns_direction = Global.CurrentKeyboard[self.RIGHT] - Global.CurrentKeyboard[self.LEFT]
         moving_directions = Global.CurrentKeyboard[self.UP] - Global.CurrentKeyboard[self.DOWN]
         gun_turns_direction = Global.CurrentKeyboard[self.GUN_RIGHT] - Global.CurrentKeyboard[self.GUN_LEFT]
+
+        self.target.rotation += turns_direction * 1.01
+        self.target.gun_rotation += gun_turns_direction * 1.01
+
+        self.target.velocity = (0,0)
+        if moving_directions:
+            speed = moving_directions * 20
+            tank_rotation = self.target.rotation
+            cos_x = math.cos(math.radians(tank_rotation + 180))
+            sin_x = math.sin(math.radians(tank_rotation + 180))
+            velocity = (speed * sin_x, speed * cos_x)
+            self.target.velocity = velocity
 
         if Global.CurrentKeyboard[self.FIRE_LIGHT_GUN]:
             self.target.fire()
@@ -39,6 +49,7 @@ class LocalTankMovingHandlers(DefaultTankMovingHandlers):
         if Global.CurrentKeyboard[self.FIRE_HEAVY_GUN]:
             self.target.heavy_fire()
 
+        return
         self.addSpeed(moving_directions)
 
         # Set the object's velocity.

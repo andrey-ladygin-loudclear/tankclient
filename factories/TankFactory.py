@@ -6,11 +6,12 @@ from objects.Tank import Tank
 class TankFactory:
 
     @staticmethod
-    def create():
+    def create(position=(0,0)):
         tank = Tank()
         tank.id = 1
         #tank.setStartPosition((100, 100))
         tank.do(LocalTankMovingHandlers())
+        tank.position = position
 
         Global.GameObjects.addTank(tank)
         return tank

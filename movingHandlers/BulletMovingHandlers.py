@@ -5,8 +5,6 @@ from time import time
 
 from cocos import actions
 
-import Global
-
 class BulletMovingHandlers(actions.Move):
     def __init__(self):
         super(BulletMovingHandlers, self).__init__()

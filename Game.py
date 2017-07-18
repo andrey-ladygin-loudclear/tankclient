@@ -40,7 +40,7 @@ def initGlobalParams():
 
     Global.GameLayers.init()
 
-    TankFactory.create()
+    TankFactory.create(position=(400,400))
 
 
 

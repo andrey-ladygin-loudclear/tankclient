@@ -3,18 +3,17 @@ from time import time
 from PodSixNet.Connection import ConnectionListener, connection
 
 #from events.Events import Events
+from events.Events import Events
 from helpers import Global
 
 
 class NetworkListener(ConnectionListener):
-    #events = Events()
+    events = Events()
 
     def __init__(self, host, port):
         self.Connect((host, port))
 
     def Network(self, update):
-        return
-
         print time(), update
 
         if update.get('action') == Global.NetworkActions.INIT:

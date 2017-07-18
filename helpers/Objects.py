@@ -15,7 +15,8 @@ class Objects:
         Global.GameLayers.addTank(tank)
 
     def addAnimation(self, anim):
-        self.globalPanel.add(anim)
+        #self.globalPanel.add(anim)
+        Global.GameLayers.addAnimation(anim)
 
     def addWall(self, wall):
         self.walls.add(wall)
@@ -27,7 +28,9 @@ class Objects:
         self.globalPanel.remove(anim)
 
     def addBullet(self, bullet):
-        self.bullets.add(bullet)
+        self.bullets.append(bullet)
+        Global.GameLayers.addBullet(bullet)
 
     def removeBullet(self, bullet):
         self.bullets.remove(bullet)
+        Global.GameLayers.addBullet(bullet)
