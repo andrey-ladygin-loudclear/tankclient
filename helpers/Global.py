@@ -1,16 +1,12 @@
-from repositories.Layers import Layers
-from events.NetworkListener import NetworkListener
-from objects.ScreenLayer import ScreenLayer
-
-
 CurrentPlayer = None
-CurrentScreen = ScreenLayer()
 CurrentKeyboard = None
-TankNetworkListenerConnection = NetworkListener('localhost', 1332)
-CollisionManager = None
 CurrentPlayerId = 0
-GameLayers = Layers()
-GameObjects = []
+
+TankNetworkListenerConnection = None
+
+CollisionManager = None
+GameLayers = None
+GameObjects = None
 
 
 class NetworkDataCodes:

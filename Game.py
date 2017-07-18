@@ -1,65 +1,48 @@
-from math import atan
-
-import PodSixNet, time
-from time import sleep
-
-# tell the client which server to connect to
-#from TankNetworkListener import TankNetworkListener
-
-import cocos
 from cocos import director
 import cocos.collision_model as cm
+from cocos import layer
 from cocos import scene
-from cocos import sprite
-from cocos.batch import BatchNode
 from pyglet.window import key
 
-import Global
-from Global import Config, Layers, CurrentScreen, TankNetworkListenerConnection
+from events.NetworkListener import NetworkListener
+from factories.TankFactory import TankFactory
+from helpers import Global
+from helpers.Layers import Layers
+from helpers.Objects import Objects
 
-
-class Game(cocos.layer.ColorLayer):
-    is_event_handler = True
-
-    def __init__(self):
-        super(Game, self).__init__(0, 0, 0, 255)
-        self.schedule(self.update)
-
-    def update(self, dt):
-        PodSixNet.Connection.connection.Pump()
-
-        if TankNetworkListenerConnection:
-            TankNetworkListenerConnection.Pump()
 
 def main():
-    director.director.init(width=3000, height=980, do_not_scale=True, resizable=True)
-    Global.CollisionManager = cm.CollisionManagerBruteForce()
+    # Initialize the window.
 
-    Layers.game = Game()
-    Layers.bullets = BatchNode()
-    Layers.walls = BatchNode()
-    Layers.backgrounds = BatchNode()
-    Layers.tanks = BatchNode()
+    director.director.init(width=3000, height=960, do_not_scale=True, resizable=True)
+    #director.director.init(do_not_scale=True, resizable=True, fullscreen=True)
 
-    Layers.game.add(Layers.backgrounds, z=0)
-    Layers.game.add(Layers.bullets, z=1)
-    Layers.game.add(Layers.walls)
-    Layers.game.add(Layers.tanks)
-
-    Layers.globalPanel = cocos.layer.Layer()
-    Layers.game.add(Layers.globalPanel, z=1)
-
-    CurrentScreen.init()
+    initGlobalParams()
 
     # Create a scene and set its initial layer.
-    main_scene = scene.Scene(Layers.game)
+    main_scene = scene.Scene(Global.GameLayers.game)
+    main_scene.schedule(Global.GameLayers.game.buttonsHandler)
+
+    director.director.on_resize = Global.GameLayers.game.resize
+    # Play the scene in the window.
+    director.director.run(main_scene)
+
+def initGlobalParams():
+    Global.CollisionManager = cm.CollisionManagerBruteForce()
+    Global.GameLayers = Layers()
+    Global.GameObjects = Objects()
 
     # Attach a KeyStateHandler to the keyboard object.
     Global.CurrentKeyboard = key.KeyStateHandler()
     director.director.window.push_handlers(Global.CurrentKeyboard)
+    #scrollerHandler = layer.ScrollingManager()
+    Global.TankNetworkListenerConnection = NetworkListener('localhost', 1332)
 
-    # Play the scene in the window.
-    director.director.run(main_scene)
+    Global.GameLayers.init()
+
+    TankFactory.create()
+
+
 
 if __name__ == '__main__':
     main()
