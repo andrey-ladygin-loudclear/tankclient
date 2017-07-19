@@ -42,17 +42,17 @@ class Layers:
     def addAnimation(self, anim):
         self.globalPanel.add(anim)
 
-    def addWall(self, wall):
-        self.walls.add(wall)
+    def addWall(self, wall, z):
+        self.walls.add(wall, z=z)
 
     def removeWall(self, wall):
         self.walls.remove(wall)
 
     def removeAnimation(self, anim):
-        self.globalPanel.remove(anim)
+        if anim in self.globalPanel: self.globalPanel.remove(anim)
 
     def addBullet(self, bullet):
         self.bullets.add(bullet)
 
     def removeBullet(self, bullet):
-        self.bullets.remove(bullet)
+        if bullet in self.bullets: self.bullets.remove(bullet)

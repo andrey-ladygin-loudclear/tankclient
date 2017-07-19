@@ -79,8 +79,7 @@ class Events():
             brick_wall.type = type
             brick_wall.src = src
 
-            Global.GameLayers.addWall(brick_wall)
-            #Global.collision_manager.add(brick_wall)
+            Global.GameLayers.addWall(brick_wall, brick_wall.type)
 
-            if brick_wall.type != 'background':
+            if brick_wall.type != 0 and brick_wall.type != 1:
                 Global.GameObjects.addWall(brick_wall)

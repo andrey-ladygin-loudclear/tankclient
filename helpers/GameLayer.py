@@ -26,8 +26,8 @@ class GameLayer(cocos.layer.ScrollableLayer):
         self.currentHeight = height
 
     def buttonsHandler(self, dt):
-        x_direction = self.CurrentKeyboard[key.LEFT] - self.CurrentKeyboard[key.RIGHT]
-        y_direction = self.CurrentKeyboard[key.DOWN] - self.CurrentKeyboard[key.UP]
+        x_direction = self.CurrentKeyboard[key.NUM_4] - self.CurrentKeyboard[key.NUM_6]
+        y_direction = self.CurrentKeyboard[key.NUM_5] - self.CurrentKeyboard[key.NUM_8]
         x, y = self.position
 
         if x_direction:
@@ -36,8 +36,8 @@ class GameLayer(cocos.layer.ScrollableLayer):
         if y_direction:
             y += y_direction * 20
 
-        # if x_direction or y_direction:
-        #     self.set_view(0, 0, self.currentWidth, self.currentHeight, x, y)
+        if x_direction or y_direction:
+            self.set_view(0, 0, self.currentWidth, self.currentHeight, x, y)
 
-        if self.CurrentKeyboard[key.SPACE]:
+        if self.CurrentKeyboard[key.NUM_0]:
             self.set_view(0, 0, self.currentWidth, self.currentHeight, 0, 0)
