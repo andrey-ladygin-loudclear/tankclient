@@ -21,7 +21,7 @@ class HeavyBulletFireAnimation:
 
     def getSprite(self, position, rotation):
         self.anim.position = position
-        self.anim.rotation = rotation - 90
+        self.anim.rotation = rotation - 180
         return self.anim
 
     def appendAnimationToLayer(self, position, rotation):

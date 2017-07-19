@@ -6,36 +6,25 @@ from objects.Tank import Tank
 class TankFactory:
 
     @staticmethod
-    def create(position=(0,0)):
+    def create(id=0, position=(0,0)):
         tank = Tank()
-        tank.id = 1
-        #tank.setStartPosition((100, 100))
-        tank.do(LocalTankMovingHandlers())
+        tank.id = id
         tank.position = position
+
+        if tank.id == Global.CurrentPlayerId:
+            tank.do(LocalTankMovingHandlers())
 
         Global.GameObjects.addTank(tank)
         return tank
 
+
     @staticmethod
-    def getOrCreate(id, fraction, position, tank_class):
-        # print "Get Tank id: ", id, position
-        tank = TankFactory.get(id)
+    def getOrCreate(id):
+        tank = Global.GameObjects.getTank(id)
 
         if tank: return tank
 
-        tank = TankFactory.createTankByClass(tank_class)
-        tank.id = id
-        tank.setStartPosition(position)
-       # tank.fireAnimation()
-
-        # if fraction == Global.NetworkDataCodes.PLAYER:
-        #     if tank.id == Global.CurrentPlayerId:
-        #         tank.do(UserTankMovingHandlers())
-
-        Global.GameLayers.addTank(tank)
-        Global.GameObjects.append(tank)
-
-        return tank
+        return TankFactory.create(id=id)
 
     @staticmethod
     def get(id):

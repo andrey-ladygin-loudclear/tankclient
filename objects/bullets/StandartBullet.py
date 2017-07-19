@@ -2,11 +2,12 @@
 import random
 
 import pyglet
-import Global
 from cocos import sprite
 from cocos.actions import Action
 
+from helpers import Global
 from objects.Bullet import Bullet
+from objects.animations.ExplosionStandartBulletAnimation import explosionStandartBulletAnimation
 
 
 class StandartBullet(Bullet):
@@ -26,5 +27,11 @@ class StandartBullet(Bullet):
         super(StandartBullet, self).__init__(self.spriteName)
 
     def removeAnimation(self):
-        if self in Global.layers['bullets']: Global.layers['bullets'].remove(self)
-        if self in Global.objects['bullets']: Global.objects['bullets'].remove(self)
+        Global.GameLayers.removeAnimation(self)
+        # if self in Global.layers['bullets']: Global.layers['bullets'].remove(self)
+        # if self in Global.objects['bullets']: Global.objects['bullets'].remove(self)
+
+    def destroy(self, position=None):
+        super(StandartBullet, self).destroy()
+        animation = explosionStandartBulletAnimation()
+        animation.appendAnimationToLayer(position, self.rotation)

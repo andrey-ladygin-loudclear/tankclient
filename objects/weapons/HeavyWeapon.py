@@ -30,6 +30,9 @@ class HeavyWeapon:
         y = self.gun.y - self.heavy_fire_offset_x * cos_x + self.heavy_fire_offset_y * sin_x
         return (x, y)
 
+    def fireRotation(self):
+        return self.gun.rotation - 90 + self.getAngleDeflection()
+
     def fireAnimationPosition(self):
         cos_x = math.cos(math.radians(self.gun.rotation - 180))
         sin_x = math.sin(math.radians(self.gun.rotation))
@@ -39,19 +42,20 @@ class HeavyWeapon:
         anim_y = y - self.heavy_fire_animation_offset_x * cos_x + self.heavy_fire_animation_offset_y * sin_x
         return (anim_x, anim_y)
 
-    def fire(self):
+    def fire(self, id=None, position=None, rotation=None, last_update_time=None):
         bullet = HeavyBullet()
-        #BulletFactory.create(bullet, id, tank, position, rotation, last_update_time)
+
+        if not position: position = self.firePosition()
+        if not rotation: rotation = self.fireRotation
+        if not last_update_time: last_update_time = time()
 
         bullet.id = id
-        #bullet.parent_id = tank.id
-        bullet.position = self.gun.position
-        bullet.start_position = self.gun.position
-        bullet.rotation = self.gun.rotation
-        bullet.last_update_time = time()#last_update_time
+        bullet.parent_id = self.gun.tank.id
+        bullet.position = position
+        bullet.start_position = position
+        bullet.rotation = rotation
+        bullet.last_update_time = last_update_time
 
-        #AnimationFactory.create(bullet, tank, rotation)
-        #BulletFactory.addToObjects(bullet)
         Global.GameObjects.addBullet(bullet)
         bullet.do(BulletMovingHandlers())
 

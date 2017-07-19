@@ -8,6 +8,7 @@ from cocos.actions import Action
 
 from helpers import Global
 from objects.Bullet import Bullet
+from objects.animations.ExplosionStandartBulletAnimation import explosionStandartBulletAnimation
 
 
 class HeavyBullet(Bullet):
@@ -28,5 +29,8 @@ class HeavyBullet(Bullet):
 
     def removeAnimation(self):
         Global.GameLayers.removeAnimation(self)
-        #if self in Global.layers['bullets']: Global.layers['bullets'].remove(self)
-        #if self in Global.objects['bullets']: Global.objects['bullets'].remove(self)
+
+    def destroy(self, position=None):
+        super(HeavyBullet, self).destroy()
+        animation = explosionStandartBulletAnimation()
+        animation.appendAnimationToLayer(position, self.rotation)

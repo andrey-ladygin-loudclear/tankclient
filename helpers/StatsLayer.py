@@ -9,15 +9,15 @@ import Global
 class StatsLayer:
     label = None
 
-    def init(self):
+    def __init__(self):
         self.label = cocos.text.Label(
             '100',
             font_name='Helvetica',
             font_size=16,
             anchor_x='left',  anchor_y='top'
         )
-        self.label.position = 0, Global.Config.dimensions['y']
-        Global.Layers.globalPanel.add(self.label)
+        self.label.position = 0, 960
+        Global.GameLayers.globalPanel.add(self.label)
 
         #TankFactory.create()
 

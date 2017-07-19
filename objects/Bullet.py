@@ -4,6 +4,7 @@ from cocos import actions
 from cocos import sprite
 from cocos.actions import Action, MoveBy
 
+from helpers import Global
 
 
 class Bullet(sprite.Sprite):
@@ -55,7 +56,9 @@ class Bullet(sprite.Sprite):
         #frames = [frame.image for frame in animation.frames]
 
     def destroy(self):
-        Global.GameLayers.removeAnimation(self)
+        Global.GameLayers.removeBullet(self)
+        pass
+        #Global.GameLayers.removeAnimation(self)
         #if self in Global.GameLayers.bullets: Global.GameLayers.removeBullet(self)
         #if self in Global.GameObjects: Global.GameObjects.remove(self)
 

@@ -21,7 +21,7 @@ class Tank(sprite.Sprite):
     def __init__(self):
         spriteName = 'assets/tank/parts/E-100_1.png'
         spriteGunName = 'assets/tank/parts/E-100_2.png'
-        self.Gun = Gun(spriteGunName)
+        self.Gun = Gun(spriteGunName, self)
         super(Tank, self).__init__(spriteName)
 
         self.scale = self.Gun.scale = 0.5

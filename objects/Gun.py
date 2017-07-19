@@ -15,11 +15,14 @@ class Gun(sprite.Sprite):
     canFire = True
     canHeavyFire = True
 
-    def __init__(self, spriteName):
+    tank = None
+
+    def __init__(self, spriteName, tank):
         super(Gun, self).__init__(spriteName)
         self.image_anchor = (self.image.width / 2, self.image.height / 2 + 20)
         self.weapon1 = HeavyWeapon(self)
         self.weapon2 = LightWeapon(self)
+        self.tank = tank
 
     def fireFirstWeapon(self):
         self.weapon1.fire()

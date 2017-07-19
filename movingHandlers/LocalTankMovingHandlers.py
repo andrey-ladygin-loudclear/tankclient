@@ -1,6 +1,8 @@
 import math
 
 import operator
+from time import time
+
 import cocos.collision_model as cm
 
 from helpers import Global
@@ -44,10 +46,33 @@ class LocalTankMovingHandlers(DefaultTankMovingHandlers):
             self.target.velocity = velocity
 
         if Global.CurrentKeyboard[self.FIRE_LIGHT_GUN]:
-            self.target.fire()
+            #self.target.fire()
+            Global.TankNetworkListenerConnection.Send({
+                'action': Global.NetworkActions.TANK_FIRE,
+                'type': Global.NetworkDataCodes.STANDART_BULLET,
+                'pos': self.target.Gun.weapon2.firePosition(),
+                'rotation': self.target.Gun.weapon2.fireRotation(),
+                'id': self.target.id
+            })
 
         if Global.CurrentKeyboard[self.FIRE_HEAVY_GUN]:
-            self.target.heavy_fire()
+            #self.target.heavy_fire()
+            Global.TankNetworkListenerConnection.Send({
+                'action': Global.NetworkActions.TANK_FIRE,
+                'type': Global.NetworkDataCodes.HEAVY_BULLET,
+                'pos': self.target.Gun.weapon1.firePosition(),
+                'rotation': self.target.Gun.weapon1.fireRotation(),
+                'id': self.target.id
+            })
+
+        Global.TankNetworkListenerConnection.Send({
+            'action': Global.NetworkActions.TANK_MOVE,
+            'position': self.target.position,
+            'rotation': self.target.rotation,
+            'gun_rotation': self.target.gun_rotation,
+            'time': time(),
+            'id': self.target.id
+        })
 
         return
         self.addSpeed(moving_directions)

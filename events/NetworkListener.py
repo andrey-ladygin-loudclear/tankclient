@@ -26,23 +26,20 @@ class NetworkListener(ConnectionListener):
         for data in update.get('data', []):
 
             if data.get('action') == Global.NetworkActions.UPDATE:
-                self.events.gameObject.update(data)
+                self.events.update(data)
 
             if data.get('action') == Global.NetworkActions.UPDATE_BATCH:
                 for player_data in data.get('objects'):
-                    self.events.gameObject.update(player_data)
-
-            if data.get('action') == Global.NetworkActions.TEST:
-                self.events.gameObject.test(data)
+                    self.events.update(player_data)
 
             if data.get('action') == Global.NetworkActions.TANK_FIRE:
-                self.events.gameObject.fire(data)
+                self.events.fire(data)
 
             if data.get('action') == Global.NetworkActions.DAMAGE:
-                self.events.gameObject.damage(data)
+                self.events.damage(data)
 
             if data.get('action') == Global.NetworkActions.DESTROY:
-                self.events.gameObject.destroy(data)
+                self.events.destroy(data)
 
     #https://www.youtube.com/watch?v=AdG_ITCFHDI EXPLODIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 

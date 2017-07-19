@@ -3,10 +3,10 @@ from threading import Timer
 import pyglet
 from cocos import sprite
 
-import Global
+from helpers import Global
 
 
-class standartBulletFireAnimation:
+class StandartBulletFireAnimation:
 
     def __init__(self):
         explosion = pyglet.image.load('assets/weapons/fire-small-gun.png')
@@ -20,19 +20,12 @@ class standartBulletFireAnimation:
         return self.animation
 
     def getSprite(self, position, rotation):
-        # cos_x = math.cos(math.radians(self.rotation - 180))
-        # sin_x = math.sin(math.radians(self.rotation))
-        # x = x + self.bullets_fired_offset_x * sin_x + self.bullets_fired_offset_y * cos_x
-        # y = y - self.bullets_fired_offset_x * cos_x + self.bullets_fired_offset_y * sin_x
-        # anim_x = x + self.bullets_fired_animation_offset_x * sin_x + self.bullets_fired_animation_offset_y * cos_x
-        # anim_y = y - self.bullets_fired_animation_offset_x * cos_x + self.bullets_fired_animation_offset_y * sin_x
-
         self.anim.position = position
-        self.anim.rotation = rotation - 90
+        self.anim.rotation = rotation - 180
         return self.anim
 
     def appendAnimationToLayer(self, position, rotation):
         anim = self.getSprite(position, rotation)
-        Global.Layers.game.add(anim)
-        t = Timer(self.animation.get_duration(), lambda: Global.Layers.game.remove(anim))
+        Global.GameLayers.addAnimation(anim)
+        t = Timer(self.animation.get_duration(), lambda: Global.GameLayers.removeAnimation(anim))
         t.start()

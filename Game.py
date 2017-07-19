@@ -40,8 +40,6 @@ def initGlobalParams():
 
     Global.GameLayers.init()
 
-    TankFactory.create(position=(400,400))
-
 
 
 if __name__ == '__main__':

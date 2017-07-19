@@ -3,7 +3,7 @@ from threading import Timer
 import pyglet
 from cocos import sprite
 
-import Global
+from helpers import Global
 
 
 class explosionStandartBulletAnimation:

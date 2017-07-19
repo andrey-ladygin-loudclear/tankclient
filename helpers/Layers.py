@@ -3,6 +3,7 @@ from cocos.batch import BatchNode
 
 from helpers import Global
 from helpers.GameLayer import GameLayer
+from helpers.StatsLayer import StatsLayer
 
 
 class Layers:
@@ -31,9 +32,7 @@ class Layers:
         self.globalPanel = cocos.layer.Layer()
         self.game.add(self.globalPanel, z=1)
 
-        print 'INIT'
-
-        #self.stats = StatsLayer()
+        self.stats = StatsLayer()
 
     def addTank(self, tank):
         self.tanks.add(tank)

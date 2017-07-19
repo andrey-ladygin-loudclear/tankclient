@@ -14,12 +14,27 @@ class Objects:
         Global.CollisionManager.add(tank)
         Global.GameLayers.addTank(tank)
 
+    def getTank(self, id):
+        for tank in self.tanks:
+            if tank.id == id: return tank
+
+        return None
+
     def addAnimation(self, anim):
         #self.globalPanel.add(anim)
         Global.GameLayers.addAnimation(anim)
 
     def addWall(self, wall):
-        self.walls.add(wall)
+        self.walls.append(wall)
+
+    def getWalls(self):
+        return self.walls
+
+    def getWall(self, id):
+        for wall in self.walls:
+            if wall.id == id: return wall
+
+        return None
 
     def removeWall(self, wall):
         self.walls.remove(wall)
@@ -30,6 +45,12 @@ class Objects:
     def addBullet(self, bullet):
         self.bullets.append(bullet)
         Global.GameLayers.addBullet(bullet)
+
+    def getBullet(self, id):
+        for bullet in self.bullets:
+            if bullet.id == id: return bullet
+
+        return None
 
     def removeBullet(self, bullet):
         self.bullets.remove(bullet)
