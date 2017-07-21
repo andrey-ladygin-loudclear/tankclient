@@ -39,8 +39,10 @@ class Events():
     def damage(self, object):
         id = object.get(Global.NetworkDataCodes.ID)
         dmg = object.get(Global.NetworkDataCodes.DAMAGE)
+        health = object.get(Global.NetworkDataCodes.HEALTH)
 
         tank = Global.GameObjects.getTank(id)
+        tank.setHealth(health)
         Global.GameLayers.stats.damage(dmg, tank.position)
 
         if id == Global.CurrentPlayerId:
@@ -53,6 +55,11 @@ class Events():
             wall = Global.GameObjects.getWall(id)
             wall.destroy()
 
+        if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.TANK:
+            id = object.get(Global.NetworkDataCodes.ID)
+            tank = Global.GameObjects.getTank(id)
+            tank.destroy()
+
         if object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.STANDART_BULLET or \
                         object.get(Global.NetworkDataCodes.TYPE) == Global.NetworkDataCodes.HEAVY_BULLET:
 
@@ -61,7 +68,6 @@ class Events():
             bullet = Global.GameObjects.getBullet(id)
             if not bullet: return
 
-            print 'destroy'
             bullet.destroy(position)
 
     def set_walls(self, walls):

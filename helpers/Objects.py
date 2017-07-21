@@ -20,6 +20,13 @@ class Objects:
 
         return None
 
+    def getTanks(self):
+        return self.tanks
+
+    def removeTank(self, tank):
+        self.tanks.remove(tank)
+        if tank in Global.GameLayers.tanks: Global.GameLayers.removeTank(tank)
+
     def addAnimation(self, anim):
         #self.globalPanel.add(anim)
         Global.GameLayers.addAnimation(anim)
@@ -38,6 +45,7 @@ class Objects:
 
     def removeWall(self, wall):
         self.walls.remove(wall)
+        if wall in Global.GameLayers.walls: Global.GameLayers.removeWall(wall)
 
     def removeAnimation(self, anim):
         self.globalPanel.remove(anim)

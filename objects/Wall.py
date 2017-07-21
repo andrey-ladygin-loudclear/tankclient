@@ -33,4 +33,3 @@ class Wall(sprite.Sprite):
 
     def destroy(self):
         if self in Global.GameObjects.getWalls(): Global.GameObjects.removeWall(self)
-        if self in Global.GameLayers.walls: Global.GameLayers.removeWall(self)

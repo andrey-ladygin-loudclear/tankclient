@@ -39,6 +39,10 @@ class Layers:
         #self.tanks.add(tank.getGunSprite())
         self.tanks.add(tank.Gun)
 
+    def removeTank(self, tank):
+        self.tanks.remove(tank)
+        self.tanks.remove(tank.Gun)
+
     def addAnimation(self, anim):
         self.globalPanel.add(anim)
 

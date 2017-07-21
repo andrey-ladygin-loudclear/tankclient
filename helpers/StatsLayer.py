@@ -1,7 +1,11 @@
 from threading import Timer
 
 import cocos
+import pyglet
 from cocos.actions import MoveBy, FadeOut
+from cocos.layer import ColorLayer
+from pyglet.image import load_animation
+from pyglet.sprite import Sprite
 
 import Global
 
@@ -18,8 +22,6 @@ class StatsLayer:
         )
         self.label.position = 0, 960
         Global.GameLayers.globalPanel.add(self.label)
-
-        #TankFactory.create()
 
     def setHealth(self, health):
         self.label.element.text = str(int(round(health)))

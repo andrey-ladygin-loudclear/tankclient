@@ -14,7 +14,7 @@ class NetworkListener(ConnectionListener):
         self.Connect((host, port))
 
     def Network(self, update):
-        print time(), update
+        #print time(), update
 
         if update.get('action') == Global.NetworkActions.INIT:
             if update.get('walls'):
