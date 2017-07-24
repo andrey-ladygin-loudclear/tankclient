@@ -40,4 +40,3 @@ class StatsLayer:
 
         t = Timer(2000, lambda: Global.GameLayers.globalPanel.remove(label))
         t.start()
-

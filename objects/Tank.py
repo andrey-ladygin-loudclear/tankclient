@@ -25,9 +25,38 @@ class Tank(sprite.Sprite):
 
     healthLayer = None
 
-    def __init__(self):
+    def __init__(self, type):
         spriteName = 'assets/tank/parts/E-100_1.png'
         spriteGunName = 'assets/tank/parts/E-100_2.png'
+
+        if type == 2:
+            spriteName = 'assets/tank/parts/k1.png'
+            spriteGunName = 'assets/tank/parts/K2.png'
+
+        if type == 3:
+            spriteName = 'assets/tank/parts/KV-2_1.png'
+            spriteGunName = 'assets/tank/parts/KV-2_2.png'
+
+        if type == 4:
+            spriteName = 'assets/tank/parts/M-6_1.png'
+            spriteGunName = 'assets/tank/parts/M-6_2.png'
+
+        if type == 5:
+            spriteName = 'assets/tank/parts/Pz.1.png'
+            spriteGunName = 'assets/tank/parts/Pz.2.png'
+
+        if type == 6:
+            spriteName = 'assets/tank/parts/Pz.2-1.png'
+            spriteGunName = 'assets/tank/parts/Pz.2-2.png'
+
+        if type == 7:
+            spriteName = 'assets/tank/parts/T34_1.png'
+            spriteGunName = 'assets/tank/parts/T34_2.png'
+
+        if type == 7:
+            spriteName = 'assets/tank/parts/Tiger-II_1.png'
+            spriteGunName = 'assets/tank/parts/Tiger-II_.png'
+
         self.Gun = Gun(spriteGunName, self)
         super(Tank, self).__init__(spriteName)
 

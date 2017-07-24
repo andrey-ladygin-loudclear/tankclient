@@ -6,8 +6,8 @@ from objects.Tank import Tank
 class TankFactory:
 
     @staticmethod
-    def create(id=0, position=(0,0)):
-        tank = Tank()
+    def create(id=0, position=(0,0), type=type):
+        tank = Tank(type)
         tank.id = id
         tank.position = position
 
@@ -19,12 +19,12 @@ class TankFactory:
 
 
     @staticmethod
-    def getOrCreate(id):
+    def getOrCreate(id, type):
         tank = Global.GameObjects.getTank(id)
 
         if tank: return tank
 
-        return TankFactory.create(id=id)
+        return TankFactory.create(id=id, type=type)
 
     @staticmethod
     def get(id):

@@ -1,3 +1,5 @@
+from pyglet.resource import ResourceNotFoundException
+
 from factories.TankFactory import TankFactory
 from helpers import Global
 from objects.Wall import Wall
@@ -10,8 +12,9 @@ class Events():
         position = object.get(Global.NetworkDataCodes.POSITION)
         rotation = object.get(Global.NetworkDataCodes.ROTATION)
         gun_rotation = object.get(Global.NetworkDataCodes.GUN_ROTATION)
+        type = object.get(Global.NetworkDataCodes.TYPE)
 
-        tank = TankFactory.getOrCreate(id)
+        tank = TankFactory.getOrCreate(id, type)
 
         if id == Global.CurrentPlayerId: return
 
@@ -73,7 +76,11 @@ class Events():
     def set_walls(self, walls):
         for wall in walls:
             src = wall.get(Global.NetworkDataCodes.SRC).replace('assets/', 'assets/map/')
-            brick_wall = Wall(src)
+
+            try:
+                brick_wall = Wall(src)
+            except ResourceNotFoundException:
+                continue
 
             type = wall.get(Global.NetworkDataCodes.TYPE)
 
@@ -84,6 +91,10 @@ class Events():
             brick_wall.position = (x, y)
             brick_wall.type = type
             brick_wall.src = src
+
+            scale = wall.get(Global.NetworkDataCodes.SCALE, None)
+            if scale:
+                brick_wall.scale = scale
 
             Global.GameLayers.addWall(brick_wall, brick_wall.type)
 
