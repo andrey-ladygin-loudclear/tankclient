@@ -3,17 +3,24 @@ from cocos import sprite
 import cocos.collision_model as cm
 
 from helpers import Global
+from helpers.HealthHelper import HealthHelper
 
 
 class Wall(sprite.Sprite):
     health = 20
     id = 0
 
-    def __init__(self, sprite):
+    healthHelper = None
+
+    def __init__(self, sprite, type):
         super(Wall, self).__init__(sprite)
+
+        if type == 5:
+            self.healthHelper = HealthHelper(self)
 
     def update_position(self, position):
         self.position = position
+        if self.healthHelper: self.healthHelper.updateHealthPosition()
         self.cshape = cm.AARectShape(
             self.position,
             self.width // 2,
@@ -33,3 +40,4 @@ class Wall(sprite.Sprite):
 
     def destroy(self):
         if self in Global.GameObjects.getWalls(): Global.GameObjects.removeWall(self)
+        self.healthHelper.destroy()

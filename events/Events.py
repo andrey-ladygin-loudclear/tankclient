@@ -40,6 +40,7 @@ class Events():
             tank.Gun.weapon1.fire(id, position, rotation, last_update_time)
 
     def damage(self, object):
+        print object
         id = object.get(Global.NetworkDataCodes.ID)
         dmg = object.get(Global.NetworkDataCodes.DAMAGE)
         health = object.get(Global.NetworkDataCodes.HEALTH)
@@ -76,19 +77,18 @@ class Events():
     def set_walls(self, walls):
         for wall in walls:
             src = wall.get(Global.NetworkDataCodes.SRC).replace('assets/', 'assets/map/')
+            type = wall.get(Global.NetworkDataCodes.TYPE)
 
             try:
-                brick_wall = Wall(src)
+                brick_wall = Wall(src, type)
             except ResourceNotFoundException:
                 continue
-
-            type = wall.get(Global.NetworkDataCodes.TYPE)
 
             brick_wall.id = wall.get(Global.NetworkDataCodes.ID)
 
             x, y = wall.get(Global.NetworkDataCodes.POSITION)
 
-            brick_wall.position = (x, y)
+            brick_wall.update_position((x, y))
             brick_wall.type = type
             brick_wall.src = src
 

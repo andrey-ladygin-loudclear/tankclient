@@ -38,7 +38,7 @@ class LocalTankMovingHandlers(DefaultTankMovingHandlers):
 
         self.target.velocity = (0,0)
         if moving_directions:
-            speed = moving_directions * 20
+            speed = moving_directions * 40
             tank_rotation = self.target.rotation
             cos_x = math.cos(math.radians(tank_rotation + 180))
             sin_x = math.sin(math.radians(tank_rotation + 180))

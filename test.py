@@ -26,19 +26,19 @@ def check(points, check_point):
     print('RESILT: ' + str(fabs(sum)))
     return fabs(sum) > 0.01
 
-print(check([
-    (10, 10),
-    (20, 10),
-    (20, 20),
-    (10, 20),
-], (20, 20)))
-
-print(check([
-    (10, 10),
-    (20, 10),
-    (20, 20),
-    (10, 20),
-], (15, 15)))
+# print(check([
+#     (10, 10),
+#     (20, 10),
+#     (20, 20),
+#     (10, 20),
+# ], (20, 20)))
+#
+# print(check([
+#     (10, 10),
+#     (20, 10),
+#     (20, 20),
+#     (10, 20),
+# ], (15, 15)))
 
 '''
 for point in points:
@@ -88,3 +88,5 @@ for point in points:
     sum += atan(s1/d1) + atan(s2/d2)
     print(fabs(sum) > 0.01)
     '''
+
+
