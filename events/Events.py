@@ -40,7 +40,6 @@ class Events():
             tank.Gun.weapon1.fire(id, position, rotation, last_update_time)
 
     def damage(self, object):
-        print object
         id = object.get(Global.NetworkDataCodes.ID)
         dmg = object.get(Global.NetworkDataCodes.DAMAGE)
         health = object.get(Global.NetworkDataCodes.HEALTH)

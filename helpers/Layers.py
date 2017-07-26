@@ -17,7 +17,7 @@ class Layers:
 
     def init(self):
         # Create a layer and add a sprite to it.
-        self.game = GameLayer(Global.CurrentKeyboard, Global.TankNetworkListenerConnection)
+        self.game = GameLayer(Global.CurrentKeyboard)
 
         self.bullets = BatchNode()
         self.walls = BatchNode()

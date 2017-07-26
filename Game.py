@@ -36,7 +36,7 @@ def initGlobalParams():
     Global.CurrentKeyboard = key.KeyStateHandler()
     director.director.window.push_handlers(Global.CurrentKeyboard)
     #scrollerHandler = layer.ScrollingManager()
-    Global.TankNetworkListenerConnection = NetworkListener('localhost', 1332)
+    #Global.TankNetworkListenerConnection = NetworkListener('localhost', 1332)
 
     Global.GameLayers.init()
 

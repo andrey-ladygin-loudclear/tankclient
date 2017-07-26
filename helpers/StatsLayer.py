@@ -1,6 +1,7 @@
 from threading import Timer
 
 import cocos
+import operator
 import pyglet
 from cocos.actions import MoveBy, FadeOut
 from cocos.layer import ColorLayer
@@ -20,8 +21,10 @@ class StatsLayer:
             font_size=16,
             anchor_x='left',  anchor_y='top'
         )
-        self.label.position = 0, 960
         Global.GameLayers.globalPanel.add(self.label)
+
+    def changleStatsPosition(self, x, y, width, height):
+        self.label.position = (x, y + height)
 
     def setHealth(self, health):
         self.label.element.text = str(int(round(health)))

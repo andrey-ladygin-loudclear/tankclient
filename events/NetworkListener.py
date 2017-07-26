@@ -10,8 +10,9 @@ from helpers import Global
 class NetworkListener(ConnectionListener):
     events = Events()
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, type):
         self.Connect((host, port))
+        self.type = type
 
     def Network(self, update):
         #print time(), update
@@ -22,6 +23,13 @@ class NetworkListener(ConnectionListener):
 
             if update.get('id'):
                 Global.CurrentPlayerId = update.get('id')
+
+            if update.get('connection_index', -1) != -1:
+                Global.TankNetworkListenerConnection.Send({
+                    'action': Global.NetworkActions.INIT,
+                    'type': self.type,
+                    'connection_index': str(update.get('connection_index')),
+                })
 
         for data in update.get('data', []):
 

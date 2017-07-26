@@ -54,6 +54,9 @@ class Tank(sprite.Sprite):
         # self.Gun.position = self.position
         # self.Gun.rotation = self.rotation + self.Gun.gun_rotation
 
+    def setHealth(self, health):
+        self.healthHelper.setHealth(health)
+
     def heavy_fire(self):
         self.Gun.fireFirstWeapon()
 
