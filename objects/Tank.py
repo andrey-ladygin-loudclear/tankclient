@@ -16,7 +16,7 @@ class Tank(sprite.Sprite):
     gun_rotation = 0
     id = 0
 
-    speed = 20
+    speed = 30
 
     old_position = (0, 0)
     velocity = (0, 0)

@@ -8,6 +8,7 @@ from cocos.actions import Action
 
 from helpers import Global
 from objects.Bullet import Bullet
+from objects.animations.ExplosionHeavyBulletAnimation import explosionHeavyBulletAnimation
 from objects.animations.ExplosionStandartBulletAnimation import explosionStandartBulletAnimation
 
 
@@ -32,5 +33,5 @@ class HeavyBullet(Bullet):
 
     def destroy(self, position=None):
         super(HeavyBullet, self).destroy()
-        animation = explosionStandartBulletAnimation()
+        animation = explosionHeavyBulletAnimation()
         animation.appendAnimationToLayer(position, self.rotation)
